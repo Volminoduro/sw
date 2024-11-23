@@ -1,4 +1,4 @@
-package org.example.translated;
+package org.example.translated.stat;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -7,7 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
-public class SubStat extends Stat {
-    int grind = 0;
-    boolean enchanted = false;
+public class InnateStat extends Stat {
+
 }

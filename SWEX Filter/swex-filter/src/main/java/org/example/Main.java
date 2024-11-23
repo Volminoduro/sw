@@ -1,8 +1,10 @@
 package org.example;
 
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import org.example.tools.Extractor;
-import org.example.translated.Rune;
+import org.example.translated.rune.Rune;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,6 +16,7 @@ public class Main {
         Collection<Rune> runesSelected = Extractor.extract("src/main/resources/Volminoduro-1858666.json", "");
 
         ObjectMapper mapper = new ObjectMapper();
-        mapper.writeValue(new File("src/main/resources/runesSelected.json"), runesSelected);
+        ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
+        writer.writeValue(new File("src/main/resources/runesSelected.json"), runesSelected);
     }
 }

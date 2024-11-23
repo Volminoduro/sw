@@ -1,4 +1,4 @@
-package org.example.translated;
+package org.example.translated.filter;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -7,6 +7,5 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
-public class MainStat extends Stat {
-
+public class EfficiencyRelativeSubPropertyFilter extends Filter {
 }

@@ -1,6 +1,14 @@
 package org.example.tools;
 
-import org.example.translated.*;
+import org.example.translated.Monster;
+import org.example.translated.rune.Location;
+import org.example.translated.rune.Quality;
+import org.example.translated.rune.Rune;
+import org.example.translated.rune.Set;
+import org.example.translated.stat.InnateStat;
+import org.example.translated.stat.MainStat;
+import org.example.translated.stat.SubStat;
+import org.example.translated.stat.TypeStat;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -12,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class ExtractorTest {
 
     private static final String runeTestFilePath = "src/test/resources/tools/extractorTest-runes.json";
-    private static final String filterTestFilePath = "";
+    private static final String filterTestFilePath = "src/test/resources/tools/extractorTest-filters.json";
 
     @Test
     void extractRuneEquippedToMonsterAwakened() throws IOException {

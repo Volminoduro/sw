@@ -6,7 +6,15 @@ import org.example.json.MonsterJSON;
 import org.example.json.RuneJSON;
 import org.example.json.SubStatJSON;
 import org.example.key.MappingKey;
-import org.example.translated.*;
+import org.example.translated.Monster;
+import org.example.translated.rune.Location;
+import org.example.translated.rune.Quality;
+import org.example.translated.rune.Rune;
+import org.example.translated.rune.Set;
+import org.example.translated.stat.InnateStat;
+import org.example.translated.stat.MainStat;
+import org.example.translated.stat.SubStat;
+import org.example.translated.stat.TypeStat;
 
 import java.io.File;
 import java.io.IOException;

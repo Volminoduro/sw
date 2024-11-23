@@ -7,7 +7,15 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.example.json.MonsterJSON;
 import org.example.json.RuneJSON;
 import org.example.key.JSONKey;
-import org.example.translated.*;
+import org.example.translated.Monster;
+import org.example.translated.rune.Location;
+import org.example.translated.rune.Quality;
+import org.example.translated.rune.Rune;
+import org.example.translated.rune.Set;
+import org.example.translated.stat.InnateStat;
+import org.example.translated.stat.MainStat;
+import org.example.translated.stat.SubStat;
+import org.example.translated.stat.TypeStat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

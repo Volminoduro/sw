@@ -1,4 +1,4 @@
-package org.example.translated;
+package org.example.translated.rune;
 
 public enum Quality {
 
