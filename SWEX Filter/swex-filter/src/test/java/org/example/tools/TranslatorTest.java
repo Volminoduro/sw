@@ -24,7 +24,7 @@ class TranslatorTest {
     @BeforeEach
     void setUp() {
         JsonNode monsterJSONNode = new ObjectMapper().createObjectNode()
-                .put(JSONKey.UNIT_ID.value, "23015")
+                .put(JSONKey.UNIT_MASTER_ID.value, "23015")
                 .put(JSONKey.RUNES.value, "[]");
         this.monsterJSON = new MonsterJSON(monsterJSONNode);
 
@@ -93,7 +93,7 @@ class TranslatorTest {
 
         Monster monsterPossessing = new Monster();
         monsterPossessing.setName("Eirgar");
-        monsterPossessing.setId(23015);
+        monsterPossessing.setId("23015");
         rune.setPossessedByMonster(monsterPossessing);
         Translator.getInstance();
 

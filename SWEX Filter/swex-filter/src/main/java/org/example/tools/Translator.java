@@ -16,6 +16,7 @@ import java.util.HashMap;
 
 public final class Translator {
 
+    public static final String UNKNOWN_MONSTER = "Unknown Monster";
     private static Translator instance;
 
     // TODO Save keys already used (performance issues)
@@ -34,10 +35,28 @@ public final class Translator {
     public static Monster translateMonsterJSON(MonsterJSON monsterJSON) {
         Monster monster = new Monster();
         monster.setId(monsterJSON.getId());
-        monster.setName(mappingJSON.get(MappingKey.MONSTER_LIST.value)
-                .get(MappingKey.MONSTER_NAMES.value)
-                .get(String.valueOf(monsterJSON.getId())).asText());
+        try {
+            monster.setName(mappingJSON.get(MappingKey.MONSTER_LIST.value)
+                    .get(MappingKey.MONSTER_NAMES.value)
+                    .get(monsterJSON.getId()).asText());
+        } catch (NullPointerException unawakenedMonster) {
+            try {
+                // System.out.println("ID : " + monsterJSON.getId());
+                String family = monsterJSON.getId().substring(0, 3);
+                family = mappingJSON.get(MappingKey.MONSTER_LIST.value)
+                        .get(MappingKey.MONSTER_NAMES.value)
+                        .get(family).asText();
+                String attribute = monsterJSON.getId().substring(monsterJSON.getId().length() - 1);
+                attribute = mappingJSON.get(MappingKey.MONSTER_LIST.value)
+                        .get(MappingKey.MONSTER_ATTRIBUTES.value)
+                        .get(attribute).asText();
+                String secondAwakening = Character.toString(monsterJSON.getId().charAt(3)).equals("3") ? " 2A" : "";
 
+                monster.setName(family + " " + attribute + secondAwakening);
+            } catch (NullPointerException unfoundMonster) {
+                monster.setName(UNKNOWN_MONSTER);
+            }
+        }
         return monster;
     }
 

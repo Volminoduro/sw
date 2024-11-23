@@ -1,7 +1,115 @@
 {
   "unit_list": [
     {
-      "unit_id": 23015,
+      "unit_master_id": 23015,
+      "runes": [
+        {
+          "rune_id": 123,
+          "wizard_id": 1858666,
+          "occupied_type": 1,
+          "occupied_id": 23015,
+          "slot_no": 1,
+          "rank": 5,
+          "class": 5,
+          "set_id": 19,
+          "upgrade_limit": 15,
+          "upgrade_curr": 15,
+          "base_value": 662530,
+          "sell_value": 135476,
+          "pri_eff": [
+            3,
+            160
+          ],
+          "prefix_eff": [
+            9,
+            6
+          ],
+          "sec_eff": [
+            [
+              2,
+              8,
+              1,
+              0
+            ],
+            [
+              12,
+              19,
+              0,
+              0
+            ],
+            [
+              10,
+              18,
+              0,
+              0
+            ],
+            [
+              8,
+              6,
+              1,
+              6
+            ]
+          ],
+          "extra": 5
+        }
+      ]
+    },
+    {
+      "unit_master_id": 12132,
+      "runes": [
+        {
+          "rune_id": 123,
+          "wizard_id": 1858666,
+          "occupied_type": 1,
+          "occupied_id": 23015,
+          "slot_no": 1,
+          "rank": 5,
+          "class": 5,
+          "set_id": 19,
+          "upgrade_limit": 15,
+          "upgrade_curr": 15,
+          "base_value": 662530,
+          "sell_value": 135476,
+          "pri_eff": [
+            3,
+            160
+          ],
+          "prefix_eff": [
+            9,
+            6
+          ],
+          "sec_eff": [
+            [
+              2,
+              8,
+              1,
+              0
+            ],
+            [
+              12,
+              19,
+              0,
+              0
+            ],
+            [
+              10,
+              18,
+              0,
+              0
+            ],
+            [
+              8,
+              6,
+              1,
+              6
+            ]
+          ],
+          "extra": 5
+        }
+      ]
+    },
+    {
+      "unit_master_id": 99939,
       "runes": [
         {
           "rune_id": 123,

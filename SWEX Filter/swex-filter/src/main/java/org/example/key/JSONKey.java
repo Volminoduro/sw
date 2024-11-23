@@ -3,7 +3,7 @@ package org.example.key;
 public enum JSONKey {
 
     MONSTER_LIST("unit_list"),
-    UNIT_ID("unit_id"),
+    UNIT_MASTER_ID("unit_master_id"),
     RUNE_ID("rune_id"),
     RUNES("runes"),
     SLOT_NO("slot_no"),

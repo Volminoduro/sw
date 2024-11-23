@@ -9,7 +9,7 @@ import lombok.Setter;
 @EqualsAndHashCode
 public class Monster {
 
-    int id;
+    String id;
     private String name;
 
     public Monster() {
