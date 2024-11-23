@@ -10,11 +10,11 @@ import java.util.Collection;
 @Getter
 public class MonsterJSON {
 
-    String id;
+    int id;
     Collection<RuneJSON> runesJSON = new ArrayList<>();
 
     public MonsterJSON(JsonNode jsonNode) {
-        this.id = jsonNode.get(JSONKey.UNIT_ID.value).asText();
+        this.id = jsonNode.get(JSONKey.UNIT_ID.value).asInt();
         jsonNode.get(JSONKey.RUNES.value).forEach(runeJSON -> runesJSON.add(new RuneJSON(runeJSON)));
     }
 

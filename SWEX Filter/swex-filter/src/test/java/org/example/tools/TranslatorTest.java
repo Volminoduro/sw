@@ -90,7 +90,13 @@ class TranslatorTest {
         subStat4.setAmount(10);
 
         rune.setSubStats(Arrays.asList(subStat1, subStat2, subStat3, subStat4));
+
+        Monster monsterPossessing = new Monster();
+        monsterPossessing.setName("Eirgar");
+        monsterPossessing.setId(23015);
+        rune.setPossessedByMonster(monsterPossessing);
         Translator.getInstance();
-        assertEquals(rune, Translator.translateRuneJSON(runeJSON));
+
+        assertEquals(rune, Translator.translateRuneJSON(runeJSON, monsterJSON));
     }
 }

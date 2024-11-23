@@ -9,7 +9,7 @@ public enum JSONKey {
     SLOT_NO("slot_no"),
     SET_ID("set_id"),
     RANK("rank"),
-    UPGRADE_CURR("upgrade_curr"), PRI_EFF("prix_eff"), PREFIX_EFF("prefix_eff"), SEC_EFF("sec_eff");
+    UPGRADE_CURR("upgrade_curr"), PRI_EFF("pri_eff"), PREFIX_EFF("prefix_eff"), SEC_EFF("sec_eff");
 
     public final String value;
 

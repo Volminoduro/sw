@@ -18,7 +18,7 @@ public final class Translator {
 
     private static Translator instance;
 
-    // TODO les key déjà mappés à save
+    // TODO Save keys already used (performance issues)
     private static HashMap<MappingKey, String> mappedKeys;
     private static JsonNode mappingJSON;
 
@@ -36,7 +36,7 @@ public final class Translator {
         monster.setId(monsterJSON.getId());
         monster.setName(mappingJSON.get(MappingKey.MONSTER_LIST.value)
                 .get(MappingKey.MONSTER_NAMES.value)
-                .get(monsterJSON.getId()).asText());
+                .get(String.valueOf(monsterJSON.getId())).asText());
 
         return monster;
     }
@@ -121,6 +121,13 @@ public final class Translator {
 
         rune.setSubStats(subStats);
 
+        return rune;
+    }
+
+    public static Rune translateRuneJSON(RuneJSON runeJSON, MonsterJSON monsterJSON) {
+        Rune rune = translateRuneJSON(runeJSON);
+        Monster monster = translateMonsterJSON(monsterJSON);
+        rune.setPossessedByMonster(monster);
         return rune;
     }
 

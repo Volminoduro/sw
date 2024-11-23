@@ -26,16 +26,18 @@ public final class Extractor {
 
         for (JsonNode monster : monsterList) {
             MonsterJSON monsterJSON = new MonsterJSON(monster);
-            monsterJSON.getRunes().forEach(rune -> runes.add(Translator.translateRuneJSON(rune)));
+            Translator.getInstance();
+            monsterJSON.getRunes().forEach(rune -> runes.add(Translator.translateRuneJSON(rune, monsterJSON)));
         }
 
         runes.addAll(extractRunesFromJsonNodeListOfRunes(jsonNode.get(JSONKey.RUNES.value)));
         return runes;
     }
 
-    public static Collection<Rune> extractRunesFromJsonNodeListOfRunes(JsonNode jsonNode) {
+    public static Collection<Rune> extractRunesFromJsonNodeListOfRunes(JsonNode jsonNode) throws IOException {
         Collection<Rune> runes = new ArrayList<>();
-        jsonNode.forEach(jsonNode1 -> runes.add(Translator.translateRuneJSON(new RuneJSON(jsonNode1))));
+        Translator.getInstance();
+        jsonNode.forEach(runeJsonNode -> runes.add(Translator.translateRuneJSON(new RuneJSON(runeJsonNode))));
         return runes;
     }
 }
