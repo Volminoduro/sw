@@ -11,9 +11,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ExtractorTest {
 
+    private static final String runeTestFilePath = "src/test/resources/tools/extractorTest-runes.json";
+    private static final String filterTestFilePath = "";
+
     @Test
     void extractRuneEquippedToMonsterAwakened() throws IOException {
-        Collection<Rune> runes = Extractor.extract("src/test/resources/runes.json", "");
+        Collection<Rune> runes = Extractor.extract(runeTestFilePath, filterTestFilePath);
         Rune rune = new Rune();
         rune.setId("123");
         rune.setLocation(Location.SLOT_1);
@@ -61,7 +64,7 @@ class ExtractorTest {
 
     @Test
     void extractRuneUnequippedToMonster() throws IOException {
-        Collection<Rune> runes = Extractor.extract("src/test/resources/runes.json", "");
+        Collection<Rune> runes = Extractor.extract(runeTestFilePath, filterTestFilePath);
         Rune rune = new Rune();
         rune.setId("321");
         rune.setLocation(Location.SLOT_2);
@@ -98,7 +101,7 @@ class ExtractorTest {
 
     @Test
     void extractRuneEquippedToMonsterUnawakened() throws IOException {
-        Collection<Rune> runes = Extractor.extract("src/test/resources/runes.json", "");
+        Collection<Rune> runes = Extractor.extract(runeTestFilePath, filterTestFilePath);
         Rune rune = new Rune();
         rune.setId("123");
         rune.setLocation(Location.SLOT_1);
@@ -147,7 +150,7 @@ class ExtractorTest {
 
     @Test
     void extractRuneEquippedToUnknownMonster() throws IOException {
-        Collection<Rune> runes = Extractor.extract("src/test/resources/runes.json", "");
+        Collection<Rune> runes = Extractor.extract(runeTestFilePath, filterTestFilePath);
         Rune rune = new Rune();
         rune.setId("123");
         rune.setLocation(Location.SLOT_1);
