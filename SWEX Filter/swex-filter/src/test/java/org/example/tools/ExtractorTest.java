@@ -30,6 +30,7 @@ class ExtractorTest {
         rune.setLocation(Location.SLOT_1);
         rune.setSet(Set.Fight);
         rune.setQuality(Quality.LEGEND);
+        rune.setStars(5);
         rune.setUpgraded(15);
 
         MainStat mainStat = new MainStat();
@@ -77,6 +78,7 @@ class ExtractorTest {
         rune.setId("321");
         rune.setLocation(Location.SLOT_2);
         rune.setSet(Set.Energy);
+        rune.setStars(6);
         rune.setQuality(Quality.LEGEND);
         rune.setUpgraded(12);
 
@@ -114,6 +116,7 @@ class ExtractorTest {
         rune.setId("123");
         rune.setLocation(Location.SLOT_1);
         rune.setSet(Set.Fight);
+        rune.setStars(5);
         rune.setQuality(Quality.LEGEND);
         rune.setUpgraded(15);
 
@@ -162,6 +165,7 @@ class ExtractorTest {
         Rune rune = new Rune();
         rune.setId("123");
         rune.setLocation(Location.SLOT_1);
+        rune.setStars(5);
         rune.setSet(Set.Fight);
         rune.setQuality(Quality.LEGEND);
         rune.setUpgraded(15);

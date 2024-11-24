@@ -71,6 +71,7 @@ public final class Translator {
     public static Rune translateRuneJSON(RuneJSON runeJSON) {
         Rune rune = new Rune();
         rune.setId(runeJSON.getId());
+        rune.setStars(Integer.parseInt(runeJSON.getStars()));
         switch (runeJSON.getSlot_no()) {
             case "1" -> rune.setLocation(Location.SLOT_1);
             case "2" -> rune.setLocation(Location.SLOT_2);
