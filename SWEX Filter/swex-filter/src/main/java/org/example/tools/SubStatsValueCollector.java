@@ -3,7 +3,9 @@ package org.example.tools;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.json.SubStatValueJSON;
+import org.example.key.MappingKey;
 import org.example.translated.filter.SubStatValue;
+import org.example.translated.stat.SubStat;
 import org.example.translated.stat.TypeStat;
 
 import java.io.File;
@@ -40,7 +42,28 @@ public class SubStatsValueCollector {
         return subStatValue;
     }
 
-    private static SubStatValueJSON getSubStatValueJSON(TypeStat typeStat, Integer grade) {
-        return null;
+    private static SubStatValueJSON getSubStatValueJSON(TypeStat typeStat, Integer grade) throws IOException {
+        JsonNode substatValuesList = mappingJSON.get(MappingKey.RUNE_LIST.value).get(MappingKey.RUNE_SUBSTAT.value);
+        Translator.getInstance();
+
+        JsonNode selectedSubStatValue = substatValuesList.get(Translator.getTypeStatIntegerFromTypeStat(typeStat).toString());
+        JsonNode maxSubStatValueNode = selectedSubStatValue.get(MappingKey.RUNE_SUBSTAT_MAX.value);
+        JsonNode selectedMaxSubStatValue = maxSubStatValueNode.get(grade.toString());
+        SubStatValueJSON subStatValueJSON = new SubStatValueJSON();
+        subStatValueJSON.setTypeStat(Translator.getTypeStatIntegerFromTypeStat(typeStat));
+        subStatValueJSON.setGrade(grade);
+        subStatValueJSON.setAmountMax(Integer.parseInt(selectedMaxSubStatValue.asText())); // TODO
+        return subStatValueJSON;
+    }
+
+    public static Float calculateTotalRelativeEfficiency(Collection<SubStat> subStats, Integer grade) throws IOException {
+        Float totalRatio = 0f;
+        for (SubStat subStat : subStats) {
+            totalRatio = (float) (subStat.getAmount() / getSubStatValue(subStat.getTypeStat(), grade).getMax()) * 100;
+        }
+        // TODO : Would it be a good idea for the ancient rune to go above 100% ?
+        // TODO : efficiency with isolation would be (totalRatio 15 x nb of TypeStat wanted)
+        totalRatio -= 160F;
+        return totalRatio;
     }
 }

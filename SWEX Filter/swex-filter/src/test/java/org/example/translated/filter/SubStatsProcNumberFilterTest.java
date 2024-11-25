@@ -6,6 +6,7 @@ import org.example.translated.stat.TypeStat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,18 +28,18 @@ class SubStatsProcNumberFilterTest {
     }
 
     @Test
-    void noFilter() {
+    void noFilter() throws IOException {
         assertTrue(filter.isEligible(rune));
     }
 
     @Test
-    void noFilter_0SubStatChosen() {
+    void noFilter_0SubStatChosen() throws IOException {
         filter.setSubStatsProcNumber(0);
         assertTrue(filter.isEligible(rune));
     }
 
     @Test
-    void isEligibleSubStats_OneProcOfTypeStat() {
+    void isEligibleSubStats_OneProcOfTypeStat() throws IOException {
         filter.getSubStats().add(TypeStat.ACC);
         filter.getSubStats().add(TypeStat.SPD);
         filter.setSubStatsProcNumber(1);
@@ -47,7 +48,7 @@ class SubStatsProcNumberFilterTest {
     }
 
     @Test
-    void isEligibleSubStats_NoneProcMatchOfTypeStat() {
+    void isEligibleSubStats_NoneProcMatchOfTypeStat() throws IOException {
         filter.getSubStats().add(TypeStat.CDMG);
         filter.getSubStats().add(TypeStat.DEF_FLAT);
         filter.setSubStatsProcNumber(1);
@@ -56,7 +57,7 @@ class SubStatsProcNumberFilterTest {
     }
 
     @Test
-    void isEligibleSubStats_NotEnoughProcMatchOfTypeStat() {
+    void isEligibleSubStats_NotEnoughProcMatchOfTypeStat() throws IOException {
         filter.getSubStats().add(TypeStat.SPD);
         filter.getSubStats().add(TypeStat.DEF_FLAT);
         filter.setSubStatsProcNumber(2);
@@ -65,7 +66,7 @@ class SubStatsProcNumberFilterTest {
     }
 
     @Test
-    void isEligibleSubStats_MultipleProcMatchsOfTypeStat() {
+    void isEligibleSubStats_MultipleProcMatchsOfTypeStat() throws IOException {
         SubStat subStat = new SubStat();
         subStat.setTypeStat(TypeStat.CRATE);
         rune.getSubStats().add(subStat);
@@ -77,7 +78,7 @@ class SubStatsProcNumberFilterTest {
     }
 
     @Test
-    void isEligibleSubStats_MoreProcOfMatchsOfTypeStat() {
+    void isEligibleSubStats_MoreProcOfMatchsOfTypeStat() throws IOException {
         SubStat subStat = new SubStat();
         subStat.setTypeStat(TypeStat.CRATE);
         rune.getSubStats().add(subStat);

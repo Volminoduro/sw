@@ -8,6 +8,7 @@ import org.example.translated.rune.Rune;
 import org.example.translated.rune.Set;
 import org.example.translated.stat.TypeStat;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -26,7 +27,7 @@ public abstract class Filter {
     boolean selectGrindstoneFromInventory;
     boolean selectGemFromInventory;
 
-    public boolean isEligible(Rune rune) {
+    public boolean isEligible(Rune rune) throws IOException {
         return isQualitiesEligible(rune)
                 && isSetsEligible(rune)
                 && isStarsEligible(rune)
@@ -55,5 +56,5 @@ public abstract class Filter {
         return innateStats.isEmpty() || innateStats.contains(rune.getInnateStat().getTypeStat());
     }
 
-    abstract boolean isSubStatsEligible(Rune rune);
+    abstract boolean isSubStatsEligible(Rune rune) throws IOException;
 }

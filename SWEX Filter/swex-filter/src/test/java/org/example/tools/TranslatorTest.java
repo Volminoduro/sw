@@ -6,8 +6,10 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.example.json.MonsterJSON;
 import org.example.json.RuneJSON;
-import org.example.key.JSONKey;
+import org.example.json.SubStatValueJSON;
+import org.example.key.SWEXFileJSONKey;
 import org.example.translated.Monster;
+import org.example.translated.filter.SubStatValue;
 import org.example.translated.rune.Location;
 import org.example.translated.rune.Quality;
 import org.example.translated.rune.Rune;
@@ -28,12 +30,13 @@ class TranslatorTest {
 
     MonsterJSON monsterJSON;
     RuneJSON runeJSON;
+    SubStatValueJSON subStatValueJSON;
 
     @BeforeEach
     void setUp() {
         JsonNode monsterJSONNode = new ObjectMapper().createObjectNode()
-                .put(JSONKey.UNIT_MASTER_ID.value, "23015")
-                .put(JSONKey.RUNES.value, "[]");
+                .put(SWEXFileJSONKey.UNIT_MASTER_ID.value, "23015")
+                .put(SWEXFileJSONKey.RUNES.value, "[]");
         this.monsterJSON = new MonsterJSON(monsterJSONNode);
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -44,17 +47,21 @@ class TranslatorTest {
                 new int[]{8, 10, 0, 0}));
 
         ObjectNode runeJSONNode = new ObjectMapper().createObjectNode()
-                .put(JSONKey.RUNE_ID.value, 321)
-                .put(JSONKey.SLOT_NO.value, 2)
-                .put(JSONKey.SET_ID.value, 1)
-                .put(JSONKey.RANK.value, 5)
-                .put(JSONKey.CLASS.value, 6)
-                .put(JSONKey.UPGRADE_CURR.value, 12);
-        runeJSONNode.set(JSONKey.PRI_EFF.value, objectMapper.valueToTree(new int[]{4, 118}));
-        runeJSONNode.set(JSONKey.PREFIX_EFF.value, objectMapper.valueToTree(new int[]{0, 0}));
-        runeJSONNode.set(JSONKey.SEC_EFF.value, subStatsRuneArrayNode);
+                .put(SWEXFileJSONKey.RUNE_ID.value, 321)
+                .put(SWEXFileJSONKey.SLOT_NO.value, 2)
+                .put(SWEXFileJSONKey.SET_ID.value, 1)
+                .put(SWEXFileJSONKey.RANK.value, 5)
+                .put(SWEXFileJSONKey.CLASS.value, 6)
+                .put(SWEXFileJSONKey.UPGRADE_CURR.value, 12);
+        runeJSONNode.set(SWEXFileJSONKey.PRI_EFF.value, objectMapper.valueToTree(new int[]{4, 118}));
+        runeJSONNode.set(SWEXFileJSONKey.PREFIX_EFF.value, objectMapper.valueToTree(new int[]{0, 0}));
+        runeJSONNode.set(SWEXFileJSONKey.SEC_EFF.value, subStatsRuneArrayNode);
 
         this.runeJSON = new RuneJSON(runeJSONNode);
+
+        ObjectNode subStatValueJSONNode = new ObjectMapper().createObjectNode();
+        this.subStatValueJSON = new SubStatValueJSON();
+
     }
 
     @Test
@@ -108,5 +115,13 @@ class TranslatorTest {
         Translator.getInstance();
 
         assertEquals(rune, Translator.translateRuneJSON(runeJSON, monsterJSON));
+    }
+
+    @Test
+    void translateSubStatsValueJSON() throws IOException {
+        Translator.getInstance();
+        SubStatValue subStatValue = new SubStatValue();
+
+        assertEquals(subStatValue, Translator.translateSubStatsValueJSON(subStatValueJSON));
     }
 }

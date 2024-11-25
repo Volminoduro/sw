@@ -167,7 +167,7 @@ public final class Translator {
         return subStatValue;
     }
 
-    private static TypeStat getTypeStatFromTypeStatInteger(Integer typeStatInteger) {
+    public static TypeStat getTypeStatFromTypeStatInteger(Integer typeStatInteger) {
         return switch (typeStatInteger) {
             case 1 -> TypeStat.HP_FLAT;
             case 2 -> TypeStat.HP_PERCENT;
@@ -183,5 +183,22 @@ public final class Translator {
             default -> null;
         };
     }
+
+    public static Integer getTypeStatIntegerFromTypeStat(TypeStat typeStat) {
+        return switch (typeStat) {
+            case TypeStat.HP_FLAT -> 1;
+            case TypeStat.HP_PERCENT -> 2;
+            case TypeStat.ATK_FLAT -> 3;
+            case TypeStat.ATK_PERCENT -> 4;
+            case TypeStat.DEF_FLAT -> 5;
+            case TypeStat.DEF_PERCENT -> 6;
+            case TypeStat.SPD -> 8;
+            case TypeStat.CRATE -> 9;
+            case TypeStat.CDMG -> 10;
+            case TypeStat.RES -> 11;
+            case TypeStat.ACC -> 12;
+        };
+    }
+
 
 }

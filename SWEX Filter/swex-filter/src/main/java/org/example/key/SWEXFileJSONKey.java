@@ -1,6 +1,6 @@
 package org.example.key;
 
-public enum JSONKey {
+public enum SWEXFileJSONKey {
 
     MONSTER_LIST("unit_list"),
     UNIT_MASTER_ID("unit_master_id"),
@@ -13,7 +13,7 @@ public enum JSONKey {
 
     public final String value;
 
-    JSONKey(String value) {
+    SWEXFileJSONKey(String value) {
         this.value = value;
     }
 }

@@ -5,11 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="75fd6fd4-68a3-42e8-8826-06f37b14e9c3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/json/SubStatValueJSON.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/tools/SubStatsValueCollector.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/translated/filter/SubStatValue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/tools/SubStatsValueCollectorTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/json/SubStatValueJSON.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/json/SubStatValueJSON.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/tools/Extractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/tools/Extractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/tools/SubStatsValueCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/tools/SubStatsValueCollector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/tools/Translator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/tools/Translator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/translated/filter/EfficiencyRelativeSubStatsFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/translated/filter/EfficiencyRelativeSubStatsFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/translated/filter/Filter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/translated/filter/Filter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/tools/TranslatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/tools/TranslatorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/translated/filter/EfficiencyRelativeSubStatsFilterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/translated/filter/EfficiencyRelativeSubStatsFilterTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/translated/filter/FilterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/translated/filter/FilterTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/translated/filter/SubStatsNumberFilterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/translated/filter/SubStatsNumberFilterTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/translated/filter/SubStatsProcNumberFilterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/translated/filter/SubStatsProcNumberFilterTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +31,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -51,12 +60,16 @@
   &quot;associatedIndex&quot;: 4
 }</component>
   <component name="ProjectId" id="2pKi7ispGJt2ZBxI7zlkyFaCrCm" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "JUnit.EfficiencyRelativeSubStatsFilterTest.isEligibleSubStats_MoreProcOfMatchsOfTypeStat.executor": "Debug",
     "JUnit.ExtractorTest.executor": "Run",
     "JUnit.FilterTest.executor": "Run",
     "JUnit.FilterTest.isEligibleInnateStats.executor": "Debug",
@@ -65,11 +78,14 @@
     "JUnit.SubStatsNumberFilterTest.executor": "Run",
     "JUnit.SubStatsNumberFilterTest.isEligibleSubStats_MoreMatchsOfTypeStat.executor": "Debug",
     "JUnit.TranslatorTest.executor": "Run",
+    "JUnit.org.example in swex-filter.executor": "Run",
     "Maven.swex-filter [clean].executor": "Run",
     "Maven.swex-filter [install].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "code.cleanup.on.save": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "git-widget-placeholder": "filter",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
@@ -82,8 +98,30 @@
     <key name="CreateClassDialog.RecentsKey">
       <recent name="org.example.tools" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="org.example.tools" />
+    </key>
   </component>
-  <component name="RunManager" selected="JUnit.SubStatsNumberFilterTest.isEligibleSubStats_MoreMatchsOfTypeStat">
+  <component name="RunManager" selected="JUnit.EfficiencyRelativeSubStatsFilterTest.isEligibleSubStats_MoreProcOfMatchsOfTypeStat">
+    <configuration name="EfficiencyRelativeSubStatsFilterTest.isEligibleSubStats_MoreProcOfMatchsOfTypeStat" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="swex-filter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example.translated.filter" />
+      <option name="MAIN_CLASS_NAME" value="org.example.translated.filter.EfficiencyRelativeSubStatsFilterTest" />
+      <option name="METHOD_NAME" value="isEligibleSubStats_MoreProcOfMatchsOfTypeStat" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="FilterTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="swex-filter" />
       <extension name="coverage">
@@ -95,22 +133,6 @@
       <option name="PACKAGE_NAME" value="org.example.translated.filter" />
       <option name="MAIN_CLASS_NAME" value="org.example.translated.filter.FilterTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="FilterTest.isEligibleInnateStats" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="swex-filter" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.translated.filter.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.example.translated.filter" />
-      <option name="MAIN_CLASS_NAME" value="org.example.translated.filter.FilterTest" />
-      <option name="METHOD_NAME" value="isEligibleInnateStats" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -146,28 +168,27 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TranslatorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="org.example in swex-filter" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="swex-filter" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.example.json.*" />
+          <option name="PATTERN" value="org.example.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="org.example.tools" />
-      <option name="MAIN_CLASS_NAME" value="org.example.tools.TranslatorTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="org.example" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.EfficiencyRelativeSubStatsFilterTest.isEligibleSubStats_MoreProcOfMatchsOfTypeStat" />
+        <item itemvalue="JUnit.org.example in swex-filter" />
         <item itemvalue="JUnit.SubStatsNumberFilterTest.isEligibleSubStats_MoreMatchsOfTypeStat" />
         <item itemvalue="JUnit.SubStatsNumberFilterTest" />
         <item itemvalue="JUnit.FilterTest" />
-        <item itemvalue="JUnit.FilterTest.isEligibleInnateStats" />
-        <item itemvalue="JUnit.TranslatorTest" />
       </list>
     </recent_temporary>
   </component>
@@ -185,12 +206,7 @@
   <component name="XDebuggerManager">
     <watches-manager>
       <configuration name="JUnit">
-        <watch expression="isQualitiesEligible(rune)" />
-        <watch expression="isSetsEligible(rune)" />
-        <watch expression="isStarsEligible(rune)" />
-        <watch expression="isMainStatsEligible(rune)" />
-        <watch expression="isInnateStatsEligible(rune)" />
-        <watch expression="isSubStatsEligible(rune)" />
+        <watch expression="Translator.getTypeStatIntegerFromTypeStat(typeStat)" />
       </configuration>
     </watches-manager>
   </component>

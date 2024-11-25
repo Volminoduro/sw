@@ -11,7 +11,4 @@ public class SubStatValue {
     TypeStat typeStat;
     Integer grade;
     Integer max;
-    Integer min;
-    boolean starting;
-    boolean increase;
 }

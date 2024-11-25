@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.json.MonsterJSON;
 import org.example.json.RuneJSON;
-import org.example.key.JSONKey;
+import org.example.key.SWEXFileJSONKey;
 import org.example.translated.filter.Filter;
 import org.example.translated.rune.Rune;
 
@@ -30,9 +30,8 @@ public final class Extractor {
         filters = extractFilters(filterJsonNode);
 
         JsonNode runeJsonNode = objectMapper.readTree(new File(swexPath));
-        JsonNode monsterList = runeJsonNode.get(JSONKey.MONSTER_LIST.value);
-        runes.addAll(extractRunesFromJsonNodeListOfMonsters(monsterList));
-        runes.addAll(extractRunesFromJsonNodeListOfRunes(runeJsonNode.get(JSONKey.RUNES.value)));
+        runes.addAll(extractRunesFromJsonNodeListOfMonsters(runeJsonNode.get(SWEXFileJSONKey.MONSTER_LIST.value)));
+        runes.addAll(extractRunesFromJsonNodeListOfRunes(runeJsonNode.get(SWEXFileJSONKey.RUNES.value)));
         return runes;
     }
 
@@ -44,8 +43,12 @@ public final class Extractor {
             monsterJSON.getRunes().forEach(runeJSON -> {
                 Rune rune = Translator.translateRuneJSON(runeJSON, monsterJSON);
                 for (Filter filter : filters) {
-                    if (filter.isEligible(rune)) {
-                        rune.getFiltersEligible().add(filter);
+                    try {
+                        if (filter.isEligible(rune)) {
+                            rune.getFiltersEligible().add(filter);
+                        }
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
                     }
                 }
                 if (!rune.getFiltersEligible().isEmpty()) {
@@ -62,8 +65,12 @@ public final class Extractor {
         jsonNode.forEach(runeJsonNode -> {
             Rune rune = Translator.translateRuneJSON(new RuneJSON(runeJsonNode));
             for (Filter filter : filters) {
-                if (filter.isEligible(rune)) {
-                    rune.getFiltersEligible().add(filter);
+                try {
+                    if (filter.isEligible(rune)) {
+                        rune.getFiltersEligible().add(filter);
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
             }
             if (!rune.getFiltersEligible().isEmpty()) {
