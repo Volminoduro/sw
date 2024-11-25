@@ -16,6 +16,7 @@ public class RuneJSON {
     String id;
     String slot_no;
     String rank;
+    String stars;
     String set_id;
     String upgrade_curr;
     Map<Integer, Integer> mainStatJSON = new HashMap<>();
@@ -27,6 +28,7 @@ public class RuneJSON {
         this.slot_no = jsonNode.get(JSONKey.SLOT_NO.value).asText();
         this.rank = jsonNode.get(JSONKey.RANK.value).asText();
         this.set_id = jsonNode.get(JSONKey.SET_ID.value).asText();
+        this.stars = jsonNode.get(JSONKey.CLASS.value).asText();
         this.upgrade_curr = jsonNode.get(JSONKey.UPGRADE_CURR.value).asText();
 
         JsonNode mainStatJsonNode = jsonNode.get(JSONKey.PRI_EFF.value);

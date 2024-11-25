@@ -48,6 +48,7 @@ class TranslatorTest {
                 .put(JSONKey.SLOT_NO.value, 2)
                 .put(JSONKey.SET_ID.value, 1)
                 .put(JSONKey.RANK.value, 5)
+                .put(JSONKey.CLASS.value, 6)
                 .put(JSONKey.UPGRADE_CURR.value, 12);
         runeJSONNode.set(JSONKey.PRI_EFF.value, objectMapper.valueToTree(new int[]{4, 118}));
         runeJSONNode.set(JSONKey.PREFIX_EFF.value, objectMapper.valueToTree(new int[]{0, 0}));
@@ -69,6 +70,7 @@ class TranslatorTest {
         rune.setId("321");
         rune.setLocation(Location.SLOT_2);
         rune.setSet(Set.Energy);
+        rune.setStars(6);
         rune.setQuality(Quality.LEGEND);
         rune.setUpgraded(12);
 

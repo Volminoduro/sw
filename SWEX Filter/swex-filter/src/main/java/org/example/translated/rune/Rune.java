@@ -21,6 +21,7 @@ public class Rune {
     Location location;
     Quality quality;
     Set set;
+    int stars;
     int upgraded;
     MainStat mainStat = new MainStat();
     InnateStat innateStat = new InnateStat();

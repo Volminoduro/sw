@@ -5,8 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.json.MonsterJSON;
 import org.example.json.RuneJSON;
 import org.example.json.SubStatJSON;
+import org.example.json.SubStatValueJSON;
 import org.example.key.MappingKey;
 import org.example.translated.Monster;
+import org.example.translated.filter.SubStatValue;
 import org.example.translated.rune.Location;
 import org.example.translated.rune.Quality;
 import org.example.translated.rune.Rune;
@@ -71,6 +73,7 @@ public final class Translator {
     public static Rune translateRuneJSON(RuneJSON runeJSON) {
         Rune rune = new Rune();
         rune.setId(runeJSON.getId());
+        rune.setStars(Integer.parseInt(runeJSON.getStars()));
         switch (runeJSON.getSlot_no()) {
             case "1" -> rune.setLocation(Location.SLOT_1);
             case "2" -> rune.setLocation(Location.SLOT_2);
@@ -156,6 +159,12 @@ public final class Translator {
         Monster monster = translateMonsterJSON(monsterJSON);
         rune.setPossessedByMonster(monster);
         return rune;
+    }
+
+    public static SubStatValue translateSubStatsValueJSON(SubStatValueJSON subStatValueJSON) {
+        SubStatValue subStatValue = new SubStatValue();
+
+        return subStatValue;
     }
 
     private static TypeStat getTypeStatFromTypeStatInteger(Integer typeStatInteger) {

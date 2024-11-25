@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="75fd6fd4-68a3-42e8-8826-06f37b14e9c3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/json/SubStatValueJSON.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/tools/SubStatsValueCollector.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/translated/filter/SubStatValue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/tools/Translator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/tools/Translator.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Volminoduro&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Volminoduro/sw.git&quot;,
+    &quot;accountId&quot;: &quot;3748a9f7-7e22-4a26-84ed-61cbad18fc18&quot;
+  }
+}</component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2pKi7ispGJt2ZBxI7zlkyFaCrCm" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.ExtractorTest.executor": "Run",
+    "JUnit.FilterTest.executor": "Run",
+    "JUnit.FilterTest.isEligibleInnateStats.executor": "Debug",
+    "JUnit.FilterTest.isEligibleInnateStats_AllTypeStats.executor": "Debug",
+    "JUnit.FilterTest.isEligibleSet_NoMatchSet.executor": "Debug",
+    "JUnit.SubStatsNumberFilterTest.executor": "Run",
+    "JUnit.SubStatsNumberFilterTest.isEligibleSubStats_MoreMatchsOfTypeStat.executor": "Debug",
+    "JUnit.TranslatorTest.executor": "Run",
+    "Maven.swex-filter [clean].executor": "Run",
+    "Maven.swex-filter [install].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "code.cleanup.on.save": "true",
+    "git-widget-placeholder": "filter",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/MySigma/sgalerne/OneDrive - SIGMA Informatique/Bureau/sw/SWEX Filter/swex-filter",
+    "rearrange.code.on.save": "true",
+    "settings.editor.selected.configurable": "actions.on.save"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.example.tools" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.SubStatsNumberFilterTest.isEligibleSubStats_MoreMatchsOfTypeStat">
+    <configuration name="FilterTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="swex-filter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.translated.filter.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example.translated.filter" />
+      <option name="MAIN_CLASS_NAME" value="org.example.translated.filter.FilterTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FilterTest.isEligibleInnateStats" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="swex-filter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.translated.filter.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example.translated.filter" />
+      <option name="MAIN_CLASS_NAME" value="org.example.translated.filter.FilterTest" />
+      <option name="METHOD_NAME" value="isEligibleInnateStats" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SubStatsNumberFilterTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="swex-filter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.translated.filter.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example.translated.filter" />
+      <option name="MAIN_CLASS_NAME" value="org.example.translated.filter.SubStatsNumberFilterTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SubStatsNumberFilterTest.isEligibleSubStats_MoreMatchsOfTypeStat" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="swex-filter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.translated.filter.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example.translated.filter" />
+      <option name="MAIN_CLASS_NAME" value="org.example.translated.filter.SubStatsNumberFilterTest" />
+      <option name="METHOD_NAME" value="isEligibleSubStats_MoreMatchsOfTypeStat" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TranslatorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="swex-filter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.json.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example.tools" />
+      <option name="MAIN_CLASS_NAME" value="org.example.tools.TranslatorTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.SubStatsNumberFilterTest.isEligibleSubStats_MoreMatchsOfTypeStat" />
+        <item itemvalue="JUnit.SubStatsNumberFilterTest" />
+        <item itemvalue="JUnit.FilterTest" />
+        <item itemvalue="JUnit.FilterTest.isEligibleInnateStats" />
+        <item itemvalue="JUnit.TranslatorTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="75fd6fd4-68a3-42e8-8826-06f37b14e9c3" name="Changes" comment="" />
+      <created>1732521001982</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1732521001982</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="JUnit">
+        <watch expression="isQualitiesEligible(rune)" />
+        <watch expression="isSetsEligible(rune)" />
+        <watch expression="isStarsEligible(rune)" />
+        <watch expression="isMainStatsEligible(rune)" />
+        <watch expression="isInnateStatsEligible(rune)" />
+        <watch expression="isSubStatsEligible(rune)" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>
