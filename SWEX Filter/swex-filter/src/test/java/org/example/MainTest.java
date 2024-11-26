@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 class MainTest {
 
     @Test
-    void main() {
+    void testMain() {
         fail();
     }
 }

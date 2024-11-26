@@ -1,156 +1,33 @@
 package org.example.tools;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.json.MonsterJSON;
-import org.example.json.RuneJSON;
-import org.example.json.SubStatJSON;
-import org.example.key.MappingKey;
-import org.example.translated.*;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
+import org.example.records.translated.enums.Location;
+import org.example.records.translated.enums.Quality;
+import org.example.records.translated.enums.Set;
+import org.example.records.translated.enums.TypeStat;
 
 public final class Translator {
 
-    public static final String UNKNOWN_MONSTER = "Unknown Monster";
-    private static Translator instance;
+    private Translator() {
 
-    // TODO Save keys already used (performance issues)
-    private static HashMap<MappingKey, String> mappedKeys;
-    private static JsonNode mappingJSON;
-
-    private Translator() throws IOException {
-        mappingJSON = new ObjectMapper().readTree(new File("src/main/resources/mapping.json"));
     }
 
-    public static Translator getInstance() throws IOException {
-        if (instance == null) instance = new Translator();
-        return instance;
+    public static Quality getQualityFromQualityId(int rank) {
+        return switch (rank) {
+            case 1 -> Quality.COMMON;
+            case 2 -> Quality.MAGIC;
+            case 3 -> Quality.RARE;
+            case 4 -> Quality.HERO;
+            case 5 -> Quality.LEGEND;
+            case 11 -> Quality.ANCIENT_COMMON;
+            case 12 -> Quality.ANCIENT_MAGIC;
+            case 13 -> Quality.ANCIENT_RARE;
+            case 14 -> Quality.ANCIENT_HERO;
+            case 15 -> Quality.ANCIENT_LEGEND;
+            default -> throw new IllegalStateException("Unexpected value: " + rank);
+        };
     }
 
-    public static Monster translateMonsterJSON(MonsterJSON monsterJSON) {
-        Monster monster = new Monster();
-        monster.setId(monsterJSON.getId());
-        try {
-            monster.setName(mappingJSON.get(MappingKey.MONSTER_LIST.value)
-                    .get(MappingKey.MONSTER_NAMES.value)
-                    .get(monsterJSON.getId()).asText());
-        } catch (NullPointerException unawakenedMonster) {
-            try {
-                // System.out.println("ID : " + monsterJSON.getId());
-                String family = monsterJSON.getId().substring(0, 3);
-                family = mappingJSON.get(MappingKey.MONSTER_LIST.value)
-                        .get(MappingKey.MONSTER_NAMES.value)
-                        .get(family).asText();
-                String attribute = monsterJSON.getId().substring(monsterJSON.getId().length() - 1);
-                attribute = mappingJSON.get(MappingKey.MONSTER_LIST.value)
-                        .get(MappingKey.MONSTER_ATTRIBUTES.value)
-                        .get(attribute).asText();
-                String secondAwakening = Character.toString(monsterJSON.getId().charAt(3)).equals("3") ? " 2A" : "";
-
-                monster.setName(family + " " + attribute + secondAwakening);
-            } catch (NullPointerException unfoundMonster) {
-                monster.setName(UNKNOWN_MONSTER);
-            }
-        }
-        return monster;
-    }
-
-    public static Rune translateRuneJSON(RuneJSON runeJSON) {
-        Rune rune = new Rune();
-        rune.setId(runeJSON.getId());
-        switch (runeJSON.getSlot_no()) {
-            case "1" -> rune.setLocation(Location.SLOT_1);
-            case "2" -> rune.setLocation(Location.SLOT_2);
-            case "3" -> rune.setLocation(Location.SLOT_3);
-            case "4" -> rune.setLocation(Location.SLOT_4);
-            case "5" -> rune.setLocation(Location.SLOT_5);
-            case "6" -> rune.setLocation(Location.SLOT_6);
-        }
-
-        switch (runeJSON.getRank()) {
-            case "1" -> rune.setQuality(Quality.COMMON);
-            case "2" -> rune.setQuality(Quality.MAGIC);
-            case "3" -> rune.setQuality(Quality.RARE);
-            case "4" -> rune.setQuality(Quality.HERO);
-            case "5" -> rune.setQuality(Quality.LEGEND);
-            case "11" -> rune.setQuality(Quality.ANCIENT_COMMON);
-            case "12" -> rune.setQuality(Quality.ANCIENT_MAGIC);
-            case "13" -> rune.setQuality(Quality.ANCIENT_RARE);
-            case "14" -> rune.setQuality(Quality.ANCIENT_HERO);
-            case "15" -> rune.setQuality(Quality.ANCIENT_LEGEND);
-        }
-
-        switch (runeJSON.getSet_id()) {
-            case "1" -> rune.setSet(Set.Energy);
-            case "2" -> rune.setSet(Set.Guard);
-            case "3" -> rune.setSet(Set.Swift);
-            case "4" -> rune.setSet(Set.Blade);
-            case "5" -> rune.setSet(Set.Rage);
-            case "6" -> rune.setSet(Set.Focus);
-            case "7" -> rune.setSet(Set.Endure);
-            case "8" -> rune.setSet(Set.Fatal);
-            case "10" -> rune.setSet(Set.Despair);
-            case "11" -> rune.setSet(Set.Vampire);
-            case "13" -> rune.setSet(Set.Violent);
-            case "14" -> rune.setSet(Set.Nemesis);
-            case "15" -> rune.setSet(Set.Will);
-            case "16" -> rune.setSet(Set.Shield);
-            case "17" -> rune.setSet(Set.Revenge);
-            case "18" -> rune.setSet(Set.Destroy);
-            case "19" -> rune.setSet(Set.Fight);
-            case "20" -> rune.setSet(Set.Determination);
-            case "21" -> rune.setSet(Set.Enhance);
-            case "22" -> rune.setSet(Set.Accuracy);
-            case "23" -> rune.setSet(Set.Tolerance);
-            case "24" -> rune.setSet(Set.Seal);
-            case "25" -> rune.setSet(Set.Intangible);
-            case "99" -> rune.setSet(Set.Immemorial);
-        }
-
-        rune.setUpgraded(Integer.parseInt(runeJSON.getUpgrade_curr()));
-
-        MainStat mainStat = new MainStat();
-        mainStat.setTypeStat(getTypeStatFromTypeStatInteger(runeJSON.getMainStatJSON().keySet().stream().findFirst().get()));
-        mainStat.setAmount(runeJSON.getMainStatJSON().values().stream().findFirst().get());
-        rune.setMainStat(mainStat);
-
-        InnateStat innateStat = new InnateStat();
-        innateStat.setTypeStat(getTypeStatFromTypeStatInteger(runeJSON.getInnateStatJSON().keySet().stream().findFirst().get()));
-        innateStat.setAmount(runeJSON.getInnateStatJSON().values().stream().findFirst().get());
-        rune.setInnateStat(innateStat);
-
-        Collection<SubStat> subStats = new ArrayList<>();
-        SubStat subStat;
-        for (SubStatJSON subStatJSON : runeJSON.getSubStatsJSON()) {
-            subStat = new SubStat();
-            subStat.setTypeStat(getTypeStatFromTypeStatInteger(subStatJSON.getTypeStat()));
-
-            subStat.setAmount(subStatJSON.getAmount());
-
-            subStat.setGrind(subStatJSON.getGrind());
-
-            subStat.setEnchanted(subStatJSON.getEnchant() == 1);
-            subStats.add(subStat);
-        }
-
-        rune.setSubStats(subStats);
-
-        return rune;
-    }
-
-    public static Rune translateRuneJSON(RuneJSON runeJSON, MonsterJSON monsterJSON) {
-        Rune rune = translateRuneJSON(runeJSON);
-        Monster monster = translateMonsterJSON(monsterJSON);
-        rune.setPossessedByMonster(monster);
-        return rune;
-    }
-
-    private static TypeStat getTypeStatFromTypeStatInteger(Integer typeStatInteger) {
+    public static TypeStat getTypeStatFromTypeStatInteger(Integer typeStatInteger) {
         return switch (typeStatInteger) {
             case 1 -> TypeStat.HP_FLAT;
             case 2 -> TypeStat.HP_PERCENT;
@@ -163,8 +40,49 @@ public final class Translator {
             case 10 -> TypeStat.CDMG;
             case 11 -> TypeStat.RES;
             case 12 -> TypeStat.ACC;
-            default -> null;
+            default -> throw new IllegalStateException("Unexpected value: " + typeStatInteger);
         };
     }
 
+    public static Set getSetFromSetId(int setId) {
+        return switch (setId) {
+            case 1 -> Set.Energy;
+            case 2 -> Set.Guard;
+            case 3 -> Set.Swift;
+            case 4 -> Set.Blade;
+            case 5 -> Set.Rage;
+            case 6 -> Set.Focus;
+            case 7 -> Set.Endure;
+            case 8 -> Set.Fatal;
+            case 10 -> Set.Despair;
+            case 11 -> Set.Vampire;
+            case 13 -> Set.Violent;
+            case 14 -> Set.Nemesis;
+            case 15 -> Set.Will;
+            case 16 -> Set.Shield;
+            case 17 -> Set.Revenge;
+            case 18 -> Set.Destroy;
+            case 19 -> Set.Fight;
+            case 20 -> Set.Determination;
+            case 21 -> Set.Enhance;
+            case 22 -> Set.Accuracy;
+            case 23 -> Set.Tolerance;
+            case 24 -> Set.Seal;
+            case 25 -> Set.Intangible;
+            case 99 -> Set.Immemorial;
+            default -> throw new IllegalStateException("Unexpected value: " + setId);
+        };
+    }
+
+    public static Location getLocationFromLocationId(int slotNo) {
+        return switch (slotNo) {
+            case 1 -> Location.SLOT_1;
+            case 2 -> Location.SLOT_2;
+            case 3 -> Location.SLOT_3;
+            case 4 -> Location.SLOT_4;
+            case 5 -> Location.SLOT_5;
+            case 6 -> Location.SLOT_6;
+            default -> throw new IllegalStateException("Unexpected value: " + slotNo);
+        };
+    }
 }

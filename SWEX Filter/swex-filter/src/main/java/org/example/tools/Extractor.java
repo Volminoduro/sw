@@ -1,43 +1,43 @@
 package org.example.tools;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.json.MonsterJSON;
-import org.example.json.RuneJSON;
 import org.example.key.JSONKey;
-import org.example.translated.Rune;
+import org.example.records.json.MonsterJSON;
+import org.example.records.translated.Rune;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
 public final class Extractor {
 
+    private static Extractor instance;
+    private static JsonNode instancedSWEXFileJsonNode;
+
     private Extractor() {
     }
 
-    public static Collection<Rune> extract(String swexPath, String filterPath) throws IOException {
+    public static void getInstance(JsonNode swexFileJsonNode) {
+        if (instance == null) instance = new Extractor();
+        instancedSWEXFileJsonNode = swexFileJsonNode;
+    }
+
+    public static Collection<Rune> extractAllRunes() {
         Collection<Rune> runes = new ArrayList<>();
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode = objectMapper.readTree(new File(swexPath));
-        JsonNode monsterList = jsonNode.get(JSONKey.MONSTER_LIST.value);
+        JsonNode monsterList = instancedSWEXFileJsonNode.get(JSONKey.MONSTER_LIST.value);
 
         for (JsonNode monster : monsterList) {
-            MonsterJSON monsterJSON = new MonsterJSON(monster);
-            Translator.getInstance();
-            monsterJSON.getRunes().forEach(rune -> runes.add(Translator.translateRuneJSON(rune, monsterJSON)));
+            MonsterJSON monsterJSON = Builder.buildMonsterJSONRecordFromJsonNode(monster);
+            monsterJSON.runesJSON().forEach(rune -> runes.add(Mapper.translateRuneJSON(rune, monsterJSON)));
         }
 
-        runes.addAll(extractRunesFromJsonNodeListOfRunes(jsonNode.get(JSONKey.RUNES.value)));
+        runes.addAll(extractRunesFromJsonNodeListOfRunes(instancedSWEXFileJsonNode.get(JSONKey.RUNES.value)));
         return runes;
     }
 
-    public static Collection<Rune> extractRunesFromJsonNodeListOfRunes(JsonNode jsonNode) throws IOException {
+    private static Collection<Rune> extractRunesFromJsonNodeListOfRunes(JsonNode jsonNode) {
         Collection<Rune> runes = new ArrayList<>();
-        Translator.getInstance();
-        jsonNode.forEach(runeJsonNode -> runes.add(Translator.translateRuneJSON(new RuneJSON(runeJsonNode))));
+        jsonNode.forEach(runeJsonNode -> runes.add(Mapper.translateRuneJSON(Builder.buildRuneJSONRecordFromJsonNode(runeJsonNode))));
         return runes;
     }
 }

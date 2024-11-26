@@ -1,6 +1,6 @@
 package org.example.filter;
 
-import org.example.translated.Rune;
+import org.example.records.translated.Rune;
 
 public abstract class Filter {
 

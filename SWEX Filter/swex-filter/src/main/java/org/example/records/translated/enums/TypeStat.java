@@ -1,4 +1,4 @@
-package org.example.translated;
+package org.example.records.translated.enums;
 
 public enum TypeStat {
 
