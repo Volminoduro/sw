@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class BuilderTest {
 
     @Test
-    void buildRuneJSONRecordFromJsonNode() {
+    void buildRuneJSONFromJsonNode() {
         ObjectMapper objectMapper = new ObjectMapper();
         ArrayNode subStatsRuneArrayNode = objectMapper.valueToTree(Arrays.asList(
                 new int[]{9, 4, 1, 0},
@@ -41,6 +41,6 @@ class BuilderTest {
                         new SubStatJSON(12, 11, 6, 0),
                         new SubStatJSON(2, 18, 0, 0),
                         new SubStatJSON(8, 10, 0, 0)));
-        assertEquals(expected, Builder.buildRuneJSONRecordFromJsonNode(runeJSONNode));
+        assertEquals(expected, Builder.buildRuneJSONFromJsonNode(runeJSONNode));
     }
 }

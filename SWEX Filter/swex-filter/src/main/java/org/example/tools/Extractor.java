@@ -27,8 +27,8 @@ public final class Extractor {
         JsonNode monsterList = instancedSWEXFileJsonNode.get(JSONKey.MONSTER_LIST.value);
 
         for (JsonNode monster : monsterList) {
-            MonsterJSON monsterJSON = Builder.buildMonsterJSONRecordFromJsonNode(monster);
-            monsterJSON.runesJSON().forEach(rune -> runes.add(Mapper.translateRuneJSON(rune, monsterJSON)));
+            MonsterJSON monsterJSON = Builder.buildMonsterJSONFromJsonNode(monster);
+            monsterJSON.runesJSON().forEach(rune -> runes.add(Mapper.translateRuneJSON(rune, Builder.buildMonsterFromMonsterJSON(monsterJSON))));
         }
 
         runes.addAll(extractRunesFromJsonNodeListOfRunes(instancedSWEXFileJsonNode.get(JSONKey.RUNES.value)));
@@ -37,7 +37,7 @@ public final class Extractor {
 
     private static Collection<Rune> extractRunesFromJsonNodeListOfRunes(JsonNode jsonNode) {
         Collection<Rune> runes = new ArrayList<>();
-        jsonNode.forEach(runeJsonNode -> runes.add(Mapper.translateRuneJSON(Builder.buildRuneJSONRecordFromJsonNode(runeJsonNode))));
+        jsonNode.forEach(runeJsonNode -> runes.add(Mapper.translateRuneJSON(Builder.buildRuneJSONFromJsonNode(runeJsonNode), null)));
         return runes;
     }
 }

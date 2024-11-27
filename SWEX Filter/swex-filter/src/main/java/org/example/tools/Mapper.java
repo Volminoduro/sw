@@ -5,6 +5,7 @@ import org.example.key.MappingKey;
 import org.example.records.json.MonsterJSON;
 import org.example.records.json.RuneJSON;
 import org.example.records.json.SubStatJSON;
+import org.example.records.translated.Monster;
 import org.example.records.translated.Rune;
 import org.example.records.translated.stat.InnateStat;
 import org.example.records.translated.stat.MainStat;
@@ -54,29 +55,16 @@ public final class Mapper {
         return monsterName;
     }
 
-    public static Rune translateRuneJSON(RuneJSON runeJSON) {
-        Rune rune = new Rune();
-        rune.setId(runeJSON.id());
-
-        rune.setLocation(Translator.getLocationFromLocationId(runeJSON.slot_no()));
-
-        rune.setQuality(Translator.getQualityFromQualityId(runeJSON.rank()));
-
-        rune.setSet(Translator.getSetFromSetId(runeJSON.set_id()));
-
-        rune.setUpgraded(runeJSON.upgrade_curr());
+    public static Rune translateRuneJSON(RuneJSON runeJSON, Monster monster) {
 
         MainStat mainStat = new MainStat(Translator.getTypeStatFromTypeStatInteger(runeJSON.mainStatJSON().key()),
                 runeJSON.mainStatJSON().value());
-        rune.setMainStat(mainStat);
 
-        // TODO : Try/catch to cancel innate initiation
         InnateStat innateStat = null;
         if (runeJSON.innateStatJSON().key() != 0 && runeJSON.innateStatJSON().value() != 0) {
             innateStat = new InnateStat(Translator.getTypeStatFromTypeStatInteger(runeJSON.innateStatJSON().key()),
                     runeJSON.innateStatJSON().value());
         }
-        rune.setInnateStat(innateStat);
 
         Collection<SubStat> subStats = new ArrayList<>();
         SubStat subStat;
@@ -86,16 +74,8 @@ public final class Mapper {
             subStats.add(subStat);
         }
 
-        rune.setSubStats(subStats);
-
-        return rune;
-    }
-
-
-    public static Rune translateRuneJSON(RuneJSON runeJSON, MonsterJSON monsterJSON) {
-        Rune rune = translateRuneJSON(runeJSON);
-        rune.setPossessedByMonster(Builder.buildMonsterRecordFromMonsterJSON(getMonsterName(monsterJSON), monsterJSON));
-        return rune;
+        return new Rune(runeJSON.id(), Translator.getLocationFromLocationId(runeJSON.slot_no()), Translator.getQualityFromQualityId(runeJSON.rank()),
+                Translator.getSetFromSetId(runeJSON.set_id()), runeJSON.upgrade_curr(), mainStat, innateStat, subStats, monster);
     }
 
 

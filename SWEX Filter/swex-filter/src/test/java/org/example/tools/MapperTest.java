@@ -41,7 +41,7 @@ class MapperTest {
         JsonNode monsterJSONNode = new ObjectMapper().createObjectNode()
                 .put(JSONKey.UNIT_MASTER_ID.value, "23015")
                 .put(JSONKey.RUNES.value, "[]");
-        this.monsterJSON = Builder.buildMonsterJSONRecordFromJsonNode(monsterJSONNode);
+        this.monsterJSON = Builder.buildMonsterJSONFromJsonNode(monsterJSONNode);
 
         ObjectMapper objectMapper = new ObjectMapper();
         ArrayNode subStatsRuneArrayNode = objectMapper.valueToTree(Arrays.asList(
@@ -60,7 +60,7 @@ class MapperTest {
         runeJSONNode.set(JSONKey.PREFIX_EFF.value, objectMapper.valueToTree(new int[]{0, 0}));
         runeJSONNode.set(JSONKey.SEC_EFF.value, subStatsRuneArrayNode);
 
-        this.runeJSON = Builder.buildRuneJSONRecordFromJsonNode(runeJSONNode);
+        this.runeJSON = Builder.buildRuneJSONFromJsonNode(runeJSONNode);
     }
 
     @Test
@@ -70,21 +70,20 @@ class MapperTest {
 
     @Test
     void translateRuneJSON() {
-        Rune excepted = new Rune();
-        excepted.setId(321);
-        excepted.setLocation(Location.SLOT_2);
-        excepted.setSet(Set.Energy);
-        excepted.setQuality(Quality.LEGEND);
-        excepted.setUpgraded(12);
-        excepted.setMainStat(new MainStat(TypeStat.ATK_PERCENT, 118));
-        excepted.setPossessedByMonster(new Monster(23015, "Eirgar"));
-
         SubStat subStat1 = new SubStat(TypeStat.CRATE, 4, true, 0);
         SubStat subStat2 = new SubStat(TypeStat.ACC, 11, false, 6);
         SubStat subStat3 = Builder.buildMinimalSubStat(TypeStat.HP_PERCENT, 18);
         SubStat subStat4 = Builder.buildMinimalSubStat(TypeStat.SPD, 10);
-        excepted.setSubStats(Arrays.asList(subStat1, subStat2, subStat3, subStat4));
 
-        assertEquals(excepted, Mapper.translateRuneJSON(runeJSON, monsterJSON));
+        Rune expected = new Rune(321,
+                Location.SLOT_2,
+                Quality.LEGEND,
+                Set.Energy,
+                12,
+                new MainStat(TypeStat.ATK_PERCENT, 118),
+                null,
+                Arrays.asList(subStat1, subStat2, subStat3, subStat4),
+                new Monster(23015, "Eirgar"));
+        assertEquals(expected, Mapper.translateRuneJSON(runeJSON, Builder.buildMonsterFromMonsterJSON(monsterJSON)));
     }
 }

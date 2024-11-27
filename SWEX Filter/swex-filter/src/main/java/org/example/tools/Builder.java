@@ -7,7 +7,6 @@ import org.example.records.json.MonsterJSON;
 import org.example.records.json.RuneJSON;
 import org.example.records.json.SubStatJSON;
 import org.example.records.translated.Monster;
-import org.example.records.translated.Rune;
 import org.example.records.translated.enums.TypeStat;
 import org.example.records.translated.stat.SubStat;
 
@@ -19,14 +18,14 @@ public final class Builder {
     private Builder() {
     }
 
-    public static MonsterJSON buildMonsterJSONRecordFromJsonNode(JsonNode jsonNode) {
+    public static MonsterJSON buildMonsterJSONFromJsonNode(JsonNode jsonNode) {
         int id = jsonNode.get(JSONKey.UNIT_MASTER_ID.value).asInt();
         Collection<RuneJSON> runeJSONS = new ArrayList<>();
-        jsonNode.get(JSONKey.RUNES.value).forEach(runeJsonNode -> runeJSONS.add(Builder.buildRuneJSONRecordFromJsonNode(runeJsonNode)));
+        jsonNode.get(JSONKey.RUNES.value).forEach(runeJsonNode -> runeJSONS.add(Builder.buildRuneJSONFromJsonNode(runeJsonNode)));
         return new MonsterJSON(id, runeJSONS);
     }
 
-    public static RuneJSON buildRuneJSONRecordFromJsonNode(JsonNode jsonNode) {
+    public static RuneJSON buildRuneJSONFromJsonNode(JsonNode jsonNode) {
         int id = jsonNode.get(JSONKey.RUNE_ID.value).asInt();
         int slot_no = jsonNode.get(JSONKey.SLOT_NO.value).asInt();
         int rank = jsonNode.get(JSONKey.RANK.value).asInt();
@@ -48,12 +47,8 @@ public final class Builder {
         return new RuneJSON(id, slot_no, rank, set_id, upgrade_curr, mainStatJSON, innateStatJSON, subStatJSONS);
     }
 
-    public static Monster buildMonsterRecordFromMonsterJSON(String monsterName, MonsterJSON monsterJSON) {
-        return new Monster(monsterJSON.id(), monsterName);
-    }
-
-    public static Rune buildRuneFromRuneJson(RuneJSON runeJSON) {
-        return null;
+    public static Monster buildMonsterFromMonsterJSON(MonsterJSON monsterJSON) {
+        return new Monster(monsterJSON.id(), Mapper.getMonsterName(monsterJSON));
     }
 
     public static SubStat buildMinimalSubStat(TypeStat typeStat, int amount) {
