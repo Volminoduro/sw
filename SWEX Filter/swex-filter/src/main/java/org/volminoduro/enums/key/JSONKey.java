@@ -1,4 +1,4 @@
-package org.volminoduro.key;
+package org.volminoduro.enums.key;
 
 public enum JSONKey {
 

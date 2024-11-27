@@ -1,8 +1,8 @@
 package org.volminoduro.records.translated;
 
-import org.volminoduro.records.translated.enums.Location;
-import org.volminoduro.records.translated.enums.Quality;
-import org.volminoduro.records.translated.enums.Set;
+import org.volminoduro.enums.translated.Location;
+import org.volminoduro.enums.translated.Quality;
+import org.volminoduro.enums.translated.Set;
 import org.volminoduro.records.translated.stat.InnateStat;
 import org.volminoduro.records.translated.stat.MainStat;
 import org.volminoduro.records.translated.stat.SubStat;

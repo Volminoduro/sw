@@ -1,13 +1,13 @@
 package org.volminoduro.tools;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import org.volminoduro.key.JSONKey;
+import org.volminoduro.enums.key.JSONKey;
 import org.volminoduro.records.Pair;
 import org.volminoduro.records.json.MonsterJSON;
 import org.volminoduro.records.json.RuneJSON;
 import org.volminoduro.records.json.SubStatJSON;
 import org.volminoduro.records.translated.Monster;
-import org.volminoduro.records.translated.enums.TypeStat;
+import org.volminoduro.enums.translated.TypeStat;
 import org.volminoduro.records.translated.stat.SubStat;
 
 import java.util.ArrayList;

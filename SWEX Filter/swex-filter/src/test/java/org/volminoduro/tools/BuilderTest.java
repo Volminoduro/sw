@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.Test;
-import org.volminoduro.key.JSONKey;
+import org.volminoduro.enums.key.JSONKey;
 import org.volminoduro.records.Pair;
 import org.volminoduro.records.json.RuneJSON;
 import org.volminoduro.records.json.SubStatJSON;

@@ -1,7 +1,7 @@
 package org.volminoduro.tools;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import org.volminoduro.key.JSONKey;
+import org.volminoduro.enums.key.JSONKey;
 import org.volminoduro.records.json.MonsterJSON;
 import org.volminoduro.records.translated.Rune;
 

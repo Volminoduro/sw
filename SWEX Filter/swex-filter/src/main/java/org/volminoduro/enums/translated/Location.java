@@ -1,4 +1,4 @@
-package org.volminoduro.records.translated.enums;
+package org.volminoduro.enums.translated;
 
 import java.util.HashMap;
 import java.util.Map;

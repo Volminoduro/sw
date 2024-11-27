@@ -1,16 +1,16 @@
 package org.volminoduro.tools;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import org.volminoduro.key.MappingKey;
+import org.volminoduro.enums.key.MappingKey;
 import org.volminoduro.records.json.MonsterJSON;
 import org.volminoduro.records.json.RuneJSON;
 import org.volminoduro.records.json.SubStatJSON;
 import org.volminoduro.records.translated.Monster;
 import org.volminoduro.records.translated.Rune;
-import org.volminoduro.records.translated.enums.Location;
-import org.volminoduro.records.translated.enums.Quality;
-import org.volminoduro.records.translated.enums.Set;
-import org.volminoduro.records.translated.enums.TypeStat;
+import org.volminoduro.enums.translated.Location;
+import org.volminoduro.enums.translated.Quality;
+import org.volminoduro.enums.translated.Set;
+import org.volminoduro.enums.translated.TypeStat;
 import org.volminoduro.records.translated.stat.InnateStat;
 import org.volminoduro.records.translated.stat.MainStat;
 import org.volminoduro.records.translated.stat.SubStat;

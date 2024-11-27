@@ -1,6 +1,6 @@
 package org.volminoduro.records.translated.stat;
 
-import org.volminoduro.records.translated.enums.TypeStat;
+import org.volminoduro.enums.translated.TypeStat;
 
 public record InnateStat(TypeStat typeStat, int amount) {
 }
