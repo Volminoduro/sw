@@ -2,6 +2,7 @@ package org.example.tools;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import org.example.key.JSONKey;
+import org.example.records.Pair;
 import org.example.records.json.MonsterJSON;
 import org.example.records.json.RuneJSON;
 import org.example.records.json.SubStatJSON;
@@ -12,7 +13,6 @@ import org.example.records.translated.stat.SubStat;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Map;
 
 public final class Builder {
 
@@ -34,10 +34,10 @@ public final class Builder {
         int upgrade_curr = jsonNode.get(JSONKey.UPGRADE_CURR.value).asInt();
 
         JsonNode mainStatJsonNode = jsonNode.get(JSONKey.PRI_EFF.value);
-        Map<Integer, Integer> mainStatJSON = Map.of(mainStatJsonNode.get(0).asInt(), mainStatJsonNode.get(1).asInt());
+        Pair<Integer, Integer> mainStatJSON = new Pair<>(mainStatJsonNode.get(0).asInt(), mainStatJsonNode.get(1).asInt());
 
         JsonNode innateStatJsonNode = jsonNode.get(JSONKey.PREFIX_EFF.value);
-        Map<Integer, Integer> innateStatJSON = Map.of(innateStatJsonNode.get(0).asInt(), innateStatJsonNode.get(1).asInt());
+        Pair<Integer, Integer> innateStatJSON = new Pair<>(innateStatJsonNode.get(0).asInt(), innateStatJsonNode.get(1).asInt());
 
         JsonNode subStatsJsonNode = jsonNode.get(JSONKey.SEC_EFF.value);
         Collection<SubStatJSON> subStatJSONS = new ArrayList<>();

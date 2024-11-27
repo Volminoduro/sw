@@ -66,7 +66,6 @@ class ExtractorTest {
         rune.setQuality(Quality.LEGEND);
         rune.setUpgraded(12);
         rune.setMainStat(new MainStat(TypeStat.ATK_PERCENT, 118));
-        rune.setInnateStat(new InnateStat(null, 0));
 
         SubStat subStat1 = new SubStat(TypeStat.CRATE, 4, true, 0);
         SubStat subStat2 = new SubStat(TypeStat.ACC, 11, false, 6);

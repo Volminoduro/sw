@@ -66,13 +66,16 @@ public final class Mapper {
 
         rune.setUpgraded(runeJSON.upgrade_curr());
 
-        MainStat mainStat = new MainStat(Translator.getTypeStatFromTypeStatInteger(runeJSON.mainStatJSON().keySet().stream().findFirst().get()),
-                runeJSON.mainStatJSON().values().stream().findFirst().get());
+        MainStat mainStat = new MainStat(Translator.getTypeStatFromTypeStatInteger(runeJSON.mainStatJSON().key()),
+                runeJSON.mainStatJSON().value());
         rune.setMainStat(mainStat);
 
         // TODO : Try/catch to cancel innate initiation
-        InnateStat innateStat = new InnateStat(Translator.getTypeStatFromTypeStatInteger(runeJSON.innateStatJSON().keySet().stream().findFirst().get()),
-                runeJSON.innateStatJSON().values().stream().findFirst().get());
+        InnateStat innateStat = null;
+        if (runeJSON.innateStatJSON().key() != 0 && runeJSON.innateStatJSON().value() != 0) {
+            innateStat = new InnateStat(Translator.getTypeStatFromTypeStatInteger(runeJSON.innateStatJSON().key()),
+                    runeJSON.innateStatJSON().value());
+        }
         rune.setInnateStat(innateStat);
 
         Collection<SubStat> subStats = new ArrayList<>();

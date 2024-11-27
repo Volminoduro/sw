@@ -4,12 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.example.key.JSONKey;
+import org.example.records.Pair;
 import org.example.records.json.RuneJSON;
 import org.example.records.json.SubStatJSON;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -35,8 +35,8 @@ class BuilderTest {
         runeJSONNode.set(JSONKey.SEC_EFF.value, subStatsRuneArrayNode);
 
         RuneJSON expected = new RuneJSON(321,
-                2, 5, 1, 12, Map.of(4, 118),
-                Map.of(0, 0),
+                2, 5, 1, 12, new Pair<>(4, 118),
+                new Pair<>(0, 0),
                 Arrays.asList(new SubStatJSON(9, 4, 0, 1),
                         new SubStatJSON(12, 11, 6, 0),
                         new SubStatJSON(2, 18, 0, 0),

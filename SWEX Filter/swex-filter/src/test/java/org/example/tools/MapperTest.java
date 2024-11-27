@@ -13,7 +13,6 @@ import org.example.records.translated.enums.Location;
 import org.example.records.translated.enums.Quality;
 import org.example.records.translated.enums.Set;
 import org.example.records.translated.enums.TypeStat;
-import org.example.records.translated.stat.InnateStat;
 import org.example.records.translated.stat.MainStat;
 import org.example.records.translated.stat.SubStat;
 import org.junit.jupiter.api.BeforeAll;
@@ -78,7 +77,6 @@ class MapperTest {
         excepted.setQuality(Quality.LEGEND);
         excepted.setUpgraded(12);
         excepted.setMainStat(new MainStat(TypeStat.ATK_PERCENT, 118));
-        excepted.setInnateStat(new InnateStat(null, 0));
         excepted.setPossessedByMonster(new Monster(23015, "Eirgar"));
 
         SubStat subStat1 = new SubStat(TypeStat.CRATE, 4, true, 0);
