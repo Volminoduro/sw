@@ -7,7 +7,10 @@ import org.volminoduro.records.json.RuneJSON;
 import org.volminoduro.records.json.SubStatJSON;
 import org.volminoduro.records.translated.Monster;
 import org.volminoduro.records.translated.Rune;
+import org.volminoduro.records.translated.enums.Location;
 import org.volminoduro.records.translated.enums.Quality;
+import org.volminoduro.records.translated.enums.Set;
+import org.volminoduro.records.translated.enums.TypeStat;
 import org.volminoduro.records.translated.stat.InnateStat;
 import org.volminoduro.records.translated.stat.MainStat;
 import org.volminoduro.records.translated.stat.SubStat;
@@ -58,25 +61,25 @@ public final class Mapper {
 
     public static Rune translateRuneJSON(RuneJSON runeJSON, Monster monster) {
 
-        MainStat mainStat = new MainStat(Translator.getTypeStatFromTypeStatInteger(runeJSON.mainStatJSON().key()),
+        MainStat mainStat = new MainStat(TypeStat.valueOfJsonMappingKey(runeJSON.mainStatJSON().key()),
                 runeJSON.mainStatJSON().value());
 
         InnateStat innateStat = null;
         if (runeJSON.innateStatJSON().key() != 0 && runeJSON.innateStatJSON().value() != 0) {
-            innateStat = new InnateStat(Translator.getTypeStatFromTypeStatInteger(runeJSON.innateStatJSON().key()),
+            innateStat = new InnateStat(TypeStat.valueOfJsonMappingKey(runeJSON.innateStatJSON().key()),
                     runeJSON.innateStatJSON().value());
         }
 
         Collection<SubStat> subStats = new ArrayList<>();
         SubStat subStat;
         for (SubStatJSON subStatJSON : runeJSON.subStatsJSON()) {
-            subStat = new SubStat(Translator.getTypeStatFromTypeStatInteger(subStatJSON.typeStat()),
+            subStat = new SubStat(TypeStat.valueOfJsonMappingKey(subStatJSON.typeStat()),
                     subStatJSON.amount(), subStatJSON.enchant() == 1, subStatJSON.grind());
             subStats.add(subStat);
         }
 
-        return new Rune(runeJSON.id(), Translator.getLocationFromLocationId(runeJSON.slot_no()), Quality.valueOfJsonMappingKey(runeJSON.rank()),
-                Translator.getSetFromSetId(runeJSON.set_id()), runeJSON.upgrade_curr(), mainStat, innateStat, subStats, monster);
+        return new Rune(runeJSON.id(), Location.valueOfJsonMappingKey(runeJSON.slot_no()), Quality.valueOfJsonMappingKey(runeJSON.rank()),
+                Set.valueOfJsonMappingKey(runeJSON.set_id()), runeJSON.upgrade_curr(), mainStat, innateStat, subStats, monster);
     }
 
 
