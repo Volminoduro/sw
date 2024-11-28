@@ -2,33 +2,38 @@ package org.volminoduro.tools;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import org.volminoduro.enums.key.MappingKey;
-import org.volminoduro.records.json.MonsterJSON;
-import org.volminoduro.records.json.RuneJSON;
-import org.volminoduro.records.json.SubStatJSON;
-import org.volminoduro.records.translated.Monster;
-import org.volminoduro.records.translated.Rune;
 import org.volminoduro.enums.translated.Location;
 import org.volminoduro.enums.translated.Quality;
 import org.volminoduro.enums.translated.Set;
 import org.volminoduro.enums.translated.TypeStat;
+import org.volminoduro.records.json.MonsterJSON;
+import org.volminoduro.records.json.RuneJSON;
+import org.volminoduro.records.json.SubStatJSON;
+import org.volminoduro.records.json.SubStatValueJSON;
+import org.volminoduro.records.translated.Monster;
+import org.volminoduro.records.translated.Rune;
 import org.volminoduro.records.translated.stat.InnateStat;
 import org.volminoduro.records.translated.stat.MainStat;
 import org.volminoduro.records.translated.stat.SubStat;
+import org.volminoduro.records.translated.stat.SubStatValue;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Objects;
 
 public final class Mapper {
 
     public static final String UNKNOWN_MONSTER = "Unknown Monster";
+    // TODO Save keys already used (performance issues)
+    private static final Collection<SubStatValue> mappedSubStatsValue = new ArrayList<>();
     private static JsonNode instancedMappingJsonNode;
     private static Mapper instance;
-
     // TODO Save keys already used (performance issues incoming)
+
     private Mapper() {
     }
 
-    public static void getInstance(JsonNode mappingJsonNode) {
+    public static void initiateInstance(JsonNode mappingJsonNode) {
         if (instance == null) instance = new Mapper();
         instancedMappingJsonNode = mappingJsonNode;
     }
@@ -78,9 +83,43 @@ public final class Mapper {
             subStats.add(subStat);
         }
 
-        return new Rune(runeJSON.id(), Location.valueOfJsonMappingKey(runeJSON.slot_no()), Quality.valueOfJsonMappingKey(runeJSON.rank()),
+        return new Rune(runeJSON.id(), Location.valueOfJsonMappingKey(runeJSON.slot_no()), Quality.valueOfJsonMappingKey(runeJSON.rank()), runeJSON.stars(),
                 Set.valueOfJsonMappingKey(runeJSON.set_id()), runeJSON.upgrade_curr(), mainStat, innateStat, subStats, monster);
     }
 
 
+    public static SubStatValue getSubStatValue(TypeStat typeStat, Integer grade) {
+        for (SubStatValue subStatValue : mappedSubStatsValue) {
+            if (subStatValue.typeStat() == typeStat && Objects.equals(subStatValue.grade(), grade)) {
+                return subStatValue;
+            }
+        }
+        SubStatValue subStatValue = Builder.buildSubStatValueFromSubStatValueJSON(getSubStatValueJSON(typeStat, grade));
+        mappedSubStatsValue.add(subStatValue);
+        return subStatValue;
+    }
+
+    private static SubStatValueJSON getSubStatValueJSON(TypeStat typeStat, Integer grade) {
+        JsonNode substatValuesList = instancedMappingJsonNode.get(MappingKey.RUNE_LIST.value).get(MappingKey.RUNE_SUBSTAT.value);
+
+        JsonNode selectedSubStatValue = substatValuesList.get(String.valueOf(typeStat.jsonMappingKey));
+        JsonNode maxSubStatValueNode = selectedSubStatValue.get(MappingKey.RUNE_SUBSTAT_MAX.value);
+        JsonNode selectedMaxSubStatValue = maxSubStatValueNode.get(grade.toString());
+        SubStatValueJSON subStatValueJSON = new SubStatValueJSON();
+        subStatValueJSON.setTypeStat(typeStat.jsonMappingKey);
+        subStatValueJSON.setGrade(grade);
+        subStatValueJSON.setAmountMax(selectedMaxSubStatValue.asInt());
+        return subStatValueJSON;
+    }
+
+    public static double calculateTotalRelativeEfficiency(Collection<SubStat> subStats, Integer grade) {
+        double totalRatio = 0;
+        for (SubStat subStat : subStats) {
+            totalRatio += (double) subStat.amount() / getSubStatValue(subStat.typeStat(), grade).max() * 100;
+        }
+        // It's chosen for ancient to go above 100%
+        totalRatio /= (80 + (subStats.size() * 20));
+        totalRatio *= 100;
+        return totalRatio;
+    }
 }

@@ -3,12 +3,12 @@ package org.volminoduro.tools;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.volminoduro.records.translated.Monster;
-import org.volminoduro.records.translated.Rune;
 import org.volminoduro.enums.translated.Location;
 import org.volminoduro.enums.translated.Quality;
 import org.volminoduro.enums.translated.Set;
 import org.volminoduro.enums.translated.TypeStat;
+import org.volminoduro.records.translated.Monster;
+import org.volminoduro.records.translated.Rune;
 import org.volminoduro.records.translated.stat.InnateStat;
 import org.volminoduro.records.translated.stat.MainStat;
 import org.volminoduro.records.translated.stat.SubStat;
@@ -29,9 +29,8 @@ class ExtractorTest {
     static void setUp() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         Extractor.getInstance(objectMapper.readTree(new File(RUNE_TEST_FILE_PATH)));
-        Mapper.getInstance(new ObjectMapper().readTree(new File(MAPPING_FILE_PATH)));
+        Mapper.initiateInstance(new ObjectMapper().readTree(new File(MAPPING_FILE_PATH)));
     }
-
 
     @Test
     void extractRuneEquippedToMonsterAwakened() {
@@ -45,6 +44,7 @@ class ExtractorTest {
         Rune expected = new Rune(123,
                 Location.SLOT_1,
                 Quality.LEGEND,
+                5,
                 Set.Fight,
                 15,
                 new MainStat(TypeStat.ATK_FLAT, 160),
@@ -66,6 +66,7 @@ class ExtractorTest {
         Rune expected = new Rune(321,
                 Location.SLOT_2,
                 Quality.LEGEND,
+                6,
                 Set.Energy,
                 12,
                 new MainStat(TypeStat.ATK_PERCENT, 118),
@@ -84,10 +85,10 @@ class ExtractorTest {
         SubStat subStat3 = Builder.buildMinimalSubStat(TypeStat.CDMG, 18);
         SubStat subStat4 = new SubStat(TypeStat.SPD, 6, true, 6);
 
-
         Rune expected = new Rune(123,
                 Location.SLOT_1,
                 Quality.LEGEND,
+                5,
                 Set.Fight,
                 15,
                 new MainStat(TypeStat.ATK_FLAT, 160),
@@ -109,6 +110,7 @@ class ExtractorTest {
         Rune expected = new Rune(123,
                 Location.SLOT_1,
                 Quality.LEGEND,
+                5,
                 Set.Fight,
                 15,
                 new MainStat(TypeStat.ATK_FLAT, 160),

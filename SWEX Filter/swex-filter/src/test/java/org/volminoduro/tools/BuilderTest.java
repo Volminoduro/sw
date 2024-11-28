@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.Test;
-import org.volminoduro.enums.key.JSONKey;
+import org.volminoduro.enums.key.SWEXFileJSONKey;
 import org.volminoduro.records.Pair;
 import org.volminoduro.records.json.RuneJSON;
 import org.volminoduro.records.json.SubStatJSON;
@@ -25,17 +25,18 @@ class BuilderTest {
                 new int[]{8, 10, 0, 0}));
 
         ObjectNode runeJSONNode = new ObjectMapper().createObjectNode()
-                .put(JSONKey.RUNE_ID.value, 321)
-                .put(JSONKey.SLOT_NO.value, 2)
-                .put(JSONKey.SET_ID.value, 1)
-                .put(JSONKey.RANK.value, 5)
-                .put(JSONKey.UPGRADE_CURR.value, 12);
-        runeJSONNode.set(JSONKey.PRI_EFF.value, objectMapper.valueToTree(new int[]{4, 118}));
-        runeJSONNode.set(JSONKey.PREFIX_EFF.value, objectMapper.valueToTree(new int[]{0, 0}));
-        runeJSONNode.set(JSONKey.SEC_EFF.value, subStatsRuneArrayNode);
+                .put(SWEXFileJSONKey.RUNE_ID.value, 321)
+                .put(SWEXFileJSONKey.SLOT_NO.value, 2)
+                .put(SWEXFileJSONKey.STARS.value, 6)
+                .put(SWEXFileJSONKey.SET_ID.value, 1)
+                .put(SWEXFileJSONKey.RANK.value, 5)
+                .put(SWEXFileJSONKey.UPGRADE_CURR.value, 12);
+        runeJSONNode.set(SWEXFileJSONKey.PRI_EFF.value, objectMapper.valueToTree(new int[]{4, 118}));
+        runeJSONNode.set(SWEXFileJSONKey.PREFIX_EFF.value, objectMapper.valueToTree(new int[]{0, 0}));
+        runeJSONNode.set(SWEXFileJSONKey.SEC_EFF.value, subStatsRuneArrayNode);
 
         RuneJSON expected = new RuneJSON(321,
-                2, 5, 1, 12, new Pair<>(4, 118),
+                2, 6, 5, 1, 12, new Pair<>(4, 118),
                 new Pair<>(0, 0),
                 Arrays.asList(new SubStatJSON(9, 4, 0, 1),
                         new SubStatJSON(12, 11, 6, 0),

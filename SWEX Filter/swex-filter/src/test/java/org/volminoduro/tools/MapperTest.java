@@ -7,21 +7,22 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.volminoduro.enums.key.JSONKey;
-import org.volminoduro.records.json.MonsterJSON;
-import org.volminoduro.records.json.RuneJSON;
-import org.volminoduro.records.translated.Monster;
-import org.volminoduro.records.translated.Rune;
+import org.volminoduro.enums.key.SWEXFileJSONKey;
 import org.volminoduro.enums.translated.Location;
 import org.volminoduro.enums.translated.Quality;
 import org.volminoduro.enums.translated.Set;
 import org.volminoduro.enums.translated.TypeStat;
+import org.volminoduro.records.json.MonsterJSON;
+import org.volminoduro.records.json.RuneJSON;
+import org.volminoduro.records.translated.Monster;
+import org.volminoduro.records.translated.Rune;
 import org.volminoduro.records.translated.stat.MainStat;
 import org.volminoduro.records.translated.stat.SubStat;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -33,14 +34,14 @@ class MapperTest {
 
     @BeforeAll
     static void setUpOnce() throws IOException {
-        Mapper.getInstance(new ObjectMapper().readTree(new File(MAPPING_FILE_PATH)));
+        Mapper.initiateInstance(new ObjectMapper().readTree(new File(MAPPING_FILE_PATH)));
     }
 
     @BeforeEach
     void setUp() {
         JsonNode monsterJSONNode = new ObjectMapper().createObjectNode()
-                .put(JSONKey.UNIT_MASTER_ID.value, "23015")
-                .put(JSONKey.RUNES.value, "[]");
+                .put(SWEXFileJSONKey.UNIT_MASTER_ID.value, "23015")
+                .put(SWEXFileJSONKey.RUNES.value, "[]");
         this.monsterJSON = Builder.buildMonsterJSONFromJsonNode(monsterJSONNode);
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -51,14 +52,15 @@ class MapperTest {
                 new int[]{8, 10, 0, 0}));
 
         ObjectNode runeJSONNode = new ObjectMapper().createObjectNode()
-                .put(JSONKey.RUNE_ID.value, 321)
-                .put(JSONKey.SLOT_NO.value, 2)
-                .put(JSONKey.SET_ID.value, 1)
-                .put(JSONKey.RANK.value, 5)
-                .put(JSONKey.UPGRADE_CURR.value, 12);
-        runeJSONNode.set(JSONKey.PRI_EFF.value, objectMapper.valueToTree(new int[]{4, 118}));
-        runeJSONNode.set(JSONKey.PREFIX_EFF.value, objectMapper.valueToTree(new int[]{0, 0}));
-        runeJSONNode.set(JSONKey.SEC_EFF.value, subStatsRuneArrayNode);
+                .put(SWEXFileJSONKey.RUNE_ID.value, 321)
+                .put(SWEXFileJSONKey.SLOT_NO.value, 2)
+                .put(SWEXFileJSONKey.STARS.value, 5)
+                .put(SWEXFileJSONKey.SET_ID.value, 1)
+                .put(SWEXFileJSONKey.RANK.value, 5)
+                .put(SWEXFileJSONKey.UPGRADE_CURR.value, 12);
+        runeJSONNode.set(SWEXFileJSONKey.PRI_EFF.value, objectMapper.valueToTree(new int[]{4, 118}));
+        runeJSONNode.set(SWEXFileJSONKey.PREFIX_EFF.value, objectMapper.valueToTree(new int[]{0, 0}));
+        runeJSONNode.set(SWEXFileJSONKey.SEC_EFF.value, subStatsRuneArrayNode);
 
         this.runeJSON = Builder.buildRuneJSONFromJsonNode(runeJSONNode);
     }
@@ -78,6 +80,7 @@ class MapperTest {
         Rune expected = new Rune(321,
                 Location.SLOT_2,
                 Quality.LEGEND,
+                5,
                 Set.Energy,
                 12,
                 new MainStat(TypeStat.ATK_PERCENT, 118),
@@ -85,5 +88,23 @@ class MapperTest {
                 Arrays.asList(subStat1, subStat2, subStat3, subStat4),
                 new Monster(23015, "Eirgar"));
         assertEquals(expected, Mapper.translateRuneJSON(runeJSON, Builder.buildMonsterFromMonsterJSON(monsterJSON)));
+    }
+
+    @Test
+    void calculateTotalRelativeEfficiency_MaxEfficiencyForOneSubStat() {
+        assertEquals(100, Mapper.calculateTotalRelativeEfficiency(List.of(new SubStat(TypeStat.SPD, 30, false, 0)), 6));
+        // Considering enchanting case
+        assertEquals(20, Mapper.calculateTotalRelativeEfficiency(List.of(new SubStat(TypeStat.SPD, 6, true, 0)), 6));
+        // Ignore grinding case
+        assertEquals(100, Mapper.calculateTotalRelativeEfficiency(List.of(new SubStat(TypeStat.SPD, 30, false, 5)), 6));
+    }
+
+    @Test
+    void calculateTotalRelativeEfficiency_With4SubStats() {
+        assertEquals(100, Mapper.calculateTotalRelativeEfficiency(List.of(new SubStat(TypeStat.SPD, 30, false, 0),
+                        new SubStat(TypeStat.ATK_FLAT, 20, false, 0),
+                        new SubStat(TypeStat.ATK_PERCENT, 8, false, 0),
+                        new SubStat(TypeStat.CRATE, 6, false, 0)),
+                6));
     }
 }

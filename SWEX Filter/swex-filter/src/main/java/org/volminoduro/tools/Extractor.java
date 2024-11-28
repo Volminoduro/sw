@@ -1,7 +1,7 @@
 package org.volminoduro.tools;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import org.volminoduro.enums.key.JSONKey;
+import org.volminoduro.enums.key.SWEXFileJSONKey;
 import org.volminoduro.records.json.MonsterJSON;
 import org.volminoduro.records.translated.Rune;
 
@@ -24,14 +24,14 @@ public final class Extractor {
     public static Collection<Rune> extractAllRunes() {
         Collection<Rune> runes = new ArrayList<>();
 
-        JsonNode monsterList = instancedSWEXFileJsonNode.get(JSONKey.MONSTER_LIST.value);
+        JsonNode monsterList = instancedSWEXFileJsonNode.get(SWEXFileJSONKey.MONSTER_LIST.value);
 
         for (JsonNode monster : monsterList) {
             MonsterJSON monsterJSON = Builder.buildMonsterJSONFromJsonNode(monster);
             monsterJSON.runesJSON().forEach(rune -> runes.add(Mapper.translateRuneJSON(rune, Builder.buildMonsterFromMonsterJSON(monsterJSON))));
         }
 
-        runes.addAll(extractRunesFromJsonNodeListOfRunes(instancedSWEXFileJsonNode.get(JSONKey.RUNES.value)));
+        runes.addAll(extractRunesFromJsonNodeListOfRunes(instancedSWEXFileJsonNode.get(SWEXFileJSONKey.RUNES.value)));
         return runes;
     }
 

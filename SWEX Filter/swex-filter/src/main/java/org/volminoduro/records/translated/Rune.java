@@ -13,6 +13,7 @@ public record Rune(
         int id,
         Location location,
         Quality quality,
+        int stars,
         Set set,
         int upgraded,
         MainStat mainStat,

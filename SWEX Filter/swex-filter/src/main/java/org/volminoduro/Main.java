@@ -23,7 +23,7 @@ public class Main {
 
         Extractor.getInstance(objectMapper.readTree(new File(swexFilePath)));
 
-        Mapper.getInstance(objectMapper.readTree(new File(mappingFilePath)));
+        Mapper.initiateInstance(objectMapper.readTree(new File(mappingFilePath)));
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.writeValue(new File(outputFilePath), Extractor.extractAllRunes());
