@@ -107,4 +107,89 @@ class MapperTest {
                         new SubStat(TypeStat.CRATE, 6, false, 0)),
                 6));
     }
+
+    @Test
+    void calculateSubStatsRoll_NoTotalRollsNoUpgradedRune() {
+        SubStat subStat1 = Builder.buildMinimalSubStat(TypeStat.CRATE, 6);
+        SubStat subStat2 = Builder.buildMinimalSubStat(TypeStat.ACC, 8);
+        SubStat subStat3 = Builder.buildMinimalSubStat(TypeStat.HP_PERCENT, 8);
+        SubStat subStat4 = Builder.buildMinimalSubStat(TypeStat.SPD, 6);
+
+        Rune rune = new Rune(321,
+                Location.SLOT_2,
+                Quality.LEGEND,
+                6,
+                Set.Energy,
+                0,
+                new MainStat(TypeStat.ATK_PERCENT, 118),
+                null,
+                Arrays.asList(subStat1, subStat2, subStat3, subStat4),
+                new Monster(23015, "Eirgar"));
+
+        assertEquals(0, Mapper.calculateSubStatsTotalRolls(rune, List.of(TypeStat.values())));
+    }
+
+    @Test
+    void calculateSubStatsRoll_NoTotalRollsInDesiredTypeStat() {
+        SubStat subStat1 = Builder.buildMinimalSubStat(TypeStat.CRATE, 6);
+        SubStat subStat2 = Builder.buildMinimalSubStat(TypeStat.ACC, 8);
+        SubStat subStat3 = Builder.buildMinimalSubStat(TypeStat.HP_PERCENT, 8);
+        SubStat subStat4 = Builder.buildMinimalSubStat(TypeStat.SPD, 30);
+
+        Rune rune = new Rune(321,
+                Location.SLOT_2,
+                Quality.LEGEND,
+                6,
+                Set.Energy,
+                12,
+                new MainStat(TypeStat.ATK_PERCENT, 118),
+                null,
+                Arrays.asList(subStat1, subStat2, subStat3, subStat4),
+                new Monster(23015, "Eirgar"));
+
+        assertEquals(0, Mapper.calculateSubStatsTotalRolls(rune, List.of(TypeStat.DEF_FLAT)));
+    }
+
+    @Test
+    void calculateSubStatsTotalRolls_MaxRollsInDesiredTypeStat() {
+        SubStat subStat1 = Builder.buildMinimalSubStat(TypeStat.CRATE, 6);
+        SubStat subStat2 = Builder.buildMinimalSubStat(TypeStat.ACC, 12);
+        SubStat subStat3 = Builder.buildMinimalSubStat(TypeStat.HP_PERCENT, 8);
+        SubStat subStat4 = Builder.buildMinimalSubStat(TypeStat.SPD, 15);
+
+        Rune rune = new Rune(321,
+                Location.SLOT_2,
+                Quality.LEGEND,
+                6,
+                Set.Energy,
+                9,
+                new MainStat(TypeStat.ATK_PERCENT, 118),
+                null,
+                Arrays.asList(subStat1, subStat2, subStat3, subStat4),
+                new Monster(23015, "Eirgar"));
+
+        assertEquals(3, Mapper.calculateSubStatsTotalRolls(rune, List.of(TypeStat.SPD, TypeStat.ACC)));
+    }
+
+    @Test
+    void calculateSubStatsTotalRolls_4RollsValueOf3InDesiredTypeStat() {
+        SubStat subStat1 = Builder.buildMinimalSubStat(TypeStat.CRATE, 6);
+        SubStat subStat2 = Builder.buildMinimalSubStat(TypeStat.ACC, 8);
+        SubStat subStat3 = Builder.buildMinimalSubStat(TypeStat.HP_PERCENT, 8);
+        SubStat subStat4 = Builder.buildMinimalSubStat(TypeStat.SPD, 20);
+
+        Rune rune = new Rune(321,
+                Location.SLOT_2,
+                Quality.LEGEND,
+                6,
+                Set.Energy,
+                12,
+                new MainStat(TypeStat.ATK_PERCENT, 118),
+                null,
+                Arrays.asList(subStat1, subStat2, subStat3, subStat4),
+                new Monster(23015, "Eirgar"));
+
+        assertEquals(4, Mapper.calculateSubStatsTotalRolls(rune, List.of(TypeStat.values())));
+    }
+
 }

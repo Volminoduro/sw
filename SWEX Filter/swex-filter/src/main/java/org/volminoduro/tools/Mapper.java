@@ -17,9 +17,7 @@ import org.volminoduro.records.translated.stat.MainStat;
 import org.volminoduro.records.translated.stat.SubStat;
 import org.volminoduro.records.translated.stat.SubStatValue;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Objects;
+import java.util.*;
 
 public final class Mapper {
 
@@ -121,5 +119,26 @@ public final class Mapper {
         totalRatio /= (80 + (subStats.size() * 20));
         totalRatio *= 100;
         return totalRatio;
+    }
+
+    public static double calculateSubStatsTotalRolls(Rune rune, Collection<TypeStat> typeStatRollssDesired) {
+        Map<TypeStat, Integer> typeStatsWithRolls = new HashMap<>();
+
+        for (SubStat subStat : rune.subStats()) {
+            SubStatValue subStatValue = getSubStatValue(subStat.typeStat(), rune.stars());
+            int rollsAmountLeft = subStat.amount() - subStatValue.max() / 5;
+            int rollsSuspected = 0;
+            if (rollsAmountLeft != 0) {
+                rollsSuspected = (int) Math.ceil((float) rollsAmountLeft / (subStatValue.max() / 5));
+            }
+
+            typeStatsWithRolls.put(subStat.typeStat(), rollsSuspected);
+        }
+
+        // TODO : Fixing too low value rolls
+        double maxRollsPossible = Math.floor((double) rune.upgraded() / 3);
+
+        // TODO Ancient runes handling
+        return typeStatsWithRolls.entrySet().stream().filter(typeStatIntegerEntry -> typeStatRollssDesired.contains(typeStatIntegerEntry.getKey())).mapToInt(Map.Entry::getValue).sum();
     }
 }
