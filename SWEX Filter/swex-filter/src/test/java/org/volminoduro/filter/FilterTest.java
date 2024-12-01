@@ -42,7 +42,7 @@ class FilterTest {
         runeForInnateStatsTest = new Rune(0, null, null, 0, null, 0,
                 null, new InnateStat(TypeStat.SPD, 0), null, null);
 
-        filter = new SubStatsRollsNumberFilter();
+        filter = new SubStatsNumberFilter();
     }
 
     @Test

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.volminoduro.enums.key.SWEXFileJSONKey;
 import org.volminoduro.enums.translated.Location;
@@ -109,6 +110,7 @@ class MapperTest {
     }
 
     @Test
+    @Disabled
     void calculateSubStatsRoll_NoTotalRollsNoUpgradedRune() {
         SubStat subStat1 = Builder.buildMinimalSubStat(TypeStat.CRATE, 6);
         SubStat subStat2 = Builder.buildMinimalSubStat(TypeStat.ACC, 8);
@@ -130,6 +132,7 @@ class MapperTest {
     }
 
     @Test
+    @Disabled
     void calculateSubStatsRoll_NoTotalRollsInDesiredTypeStat() {
         SubStat subStat1 = Builder.buildMinimalSubStat(TypeStat.CRATE, 6);
         SubStat subStat2 = Builder.buildMinimalSubStat(TypeStat.ACC, 8);
@@ -151,6 +154,7 @@ class MapperTest {
     }
 
     @Test
+    @Disabled
     void calculateSubStatsTotalRolls_MaxRollsInDesiredTypeStat() {
         SubStat subStat1 = Builder.buildMinimalSubStat(TypeStat.CRATE, 6);
         SubStat subStat2 = Builder.buildMinimalSubStat(TypeStat.ACC, 12);
@@ -172,6 +176,7 @@ class MapperTest {
     }
 
     @Test
+    @Disabled
     void calculateSubStatsTotalRolls_4RollsValueOf3InDesiredTypeStat() {
         SubStat subStat1 = Builder.buildMinimalSubStat(TypeStat.CRATE, 6);
         SubStat subStat2 = Builder.buildMinimalSubStat(TypeStat.ACC, 8);

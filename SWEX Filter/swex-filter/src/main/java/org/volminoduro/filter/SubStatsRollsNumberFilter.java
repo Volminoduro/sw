@@ -4,7 +4,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.volminoduro.records.translated.Rune;
-import org.volminoduro.tools.Mapper;
 
 @Getter
 @Setter
@@ -15,8 +14,9 @@ public class SubStatsRollsNumberFilter extends Filter {
 
     @Override
     boolean isSubStatsEligible(Rune rune) {
-        return subStats.isEmpty()
-                || Mapper.calculateSubStatsTotalRolls(rune, getSubStats()) >= subStatsRollsNumber;
+        throw new RuntimeException("Don't use SubStatsRollsNumberFilter, not ready yet !");
+//        return subStats.isEmpty()
+//                || Mapper.calculateSubStatsTotalRolls(rune, getSubStats()) >= subStatsRollsNumber;
     }
 
 }

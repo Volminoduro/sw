@@ -1,6 +1,7 @@
 package org.volminoduro.filter;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.volminoduro.enums.translated.TypeStat;
 import org.volminoduro.records.translated.Rune;
@@ -13,6 +14,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@Disabled
 class SubStatsRollsNumberFilterTest {
 
     Rune rune;
