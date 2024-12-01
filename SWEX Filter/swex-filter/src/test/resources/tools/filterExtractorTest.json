@@ -1,0 +1,236 @@
+{
+  "filters": [
+    {
+      "name": ""
+    },
+    {
+      "type": {
+        "mode": "efficiency",
+        "value": 80
+      }
+    },
+    {
+      "name": "extractFilter_NoTypeIsNotIncluded"
+    },
+    {
+      "name": "extractFilter_WithSet",
+      "type": {
+        "mode": "efficiency",
+        "value": 80
+      },
+      "sets": [
+        "Energy"
+      ]
+    },
+    {
+      "name": "extractFilter_WithSet_All",
+      "type": {
+        "mode": "efficiency",
+        "value": 80
+      },
+      "sets": [
+        "ALL"
+      ]
+    },
+    {
+      "name": "extractFilter_WithQuality",
+      "type": {
+        "mode": "efficiency",
+        "value": 80
+      },
+      "qualities": [
+        "Legend"
+      ]
+    },
+    {
+      "name": "extractFilter_WithQuality_All",
+      "type": {
+        "mode": "efficiency",
+        "value": 80
+      },
+      "qualities": [
+        "ALL"
+      ]
+    },
+    {
+      "name": "extractFilter_WithStars",
+      "type": {
+        "mode": "efficiency",
+        "value": 80
+      },
+      "stars": [
+        1
+      ]
+    },
+    {
+      "name": "extractFilter_WithStars_All",
+      "type": {
+        "mode": "efficiency",
+        "value": 80
+      },
+      "stars": [
+        "ALL"
+      ]
+    },
+    {
+      "name": "extractFilter_WithUpgraded",
+      "type": {
+        "mode": "efficiency",
+        "value": 80
+      },
+      "upgraded": [
+        1
+      ]
+    },
+    {
+      "name": "extractFilter_WithUpgraded_All",
+      "type": {
+        "mode": "efficiency",
+        "value": 80
+      },
+      "upgraded": [
+        "ALL"
+      ]
+    },
+    {
+      "name": "extractFilter_WithSlot",
+      "type": {
+        "mode": "efficiency",
+        "value": 80
+      },
+      "slots": [
+        5
+      ]
+    },
+    {
+      "name": "extractFilter_WithSlot_All",
+      "type": {
+        "mode": "efficiency",
+        "value": 80
+      },
+      "slots": [
+        "ALL"
+      ]
+    },
+    {
+      "name": "extractFilter_WithMainStat",
+      "type": {
+        "mode": "efficiency",
+        "value": 80
+      },
+      "main_stat": [
+        "ATK %",
+        "ATK +"
+      ]
+    },
+    {
+      "name": "extractFilter_WithMainStat_All",
+      "type": {
+        "mode": "efficiency",
+        "value": 80
+      },
+      "main_stat": [
+        "ALL"
+      ]
+    },
+    {
+      "name": "extractFilter_WithInnateStat",
+      "type": {
+        "mode": "efficiency",
+        "value": 80
+      },
+      "innate_stat": [
+        "DEF +",
+        "SPD"
+      ]
+    },
+    {
+      "name": "extractFilter_WithInnateStat_All",
+      "type": {
+        "mode": "efficiency",
+        "value": 80
+      },
+      "innate_stat": [
+        "ALL"
+      ]
+    },
+    {
+      "name": "extractFilter_WithSubStat",
+      "type": {
+        "mode": "efficiency",
+        "value": 80
+      },
+      "sub_stat": [
+        "ACC"
+      ]
+    },
+    {
+      "name": "extractFilter_WithSubStat_All",
+      "type": {
+        "mode": "efficiency",
+        "value": 80
+      },
+      "sub_stat": [
+        "ALL"
+      ]
+    },
+    {
+      "name": "extractFilter_SubStatsNumberFilter_NoAmount",
+      "type": {
+        "mode": "substats"
+      }
+    },
+    {
+      "name": "extractFilter_SubStatsNumberFilter_WithAmount",
+      "type": {
+        "mode": "substats",
+        "value": 3
+      }
+    },
+    {
+      "name": "extractFilter_EfficiencyRelativeSubStatsFilter_NoThreshold",
+      "type": {
+        "mode": "efficiency"
+      }
+    },
+    {
+      "name": "extractFilter_EfficiencyRelativeSubStatsFilter_WithThreshold",
+      "type": {
+        "mode": "efficiency",
+        "value": 80
+      }
+    },
+    {
+      "name": "efficiency 1 no filter specific",
+      "type": {
+        "mode": "efficiency",
+        "value": 80
+      },
+      "sets": [
+        "Energy"
+      ],
+      "qualities": [
+        "Legend"
+      ],
+      "stars": [
+        "ALL"
+      ],
+      "upgraded": [
+        "ALL"
+      ],
+      "slots": [
+        "ALL"
+      ],
+      "main_stat": [
+        "ATK %",
+        "ATK +"
+      ],
+      "innate_stat": [
+        "ALL"
+      ],
+      "sub_stat": [
+        "ALL"
+      ]
+    }
+  ]
+}

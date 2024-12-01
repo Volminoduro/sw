@@ -1,8 +1,8 @@
 package org.volminoduro;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.volminoduro.tools.Extractor;
-import org.volminoduro.tools.Mapper;
+import org.volminoduro.tools.RuneExtractor;
+import org.volminoduro.tools.SWEXMapper;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,11 +21,11 @@ public class Main {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
-        Extractor.getInstance(objectMapper.readTree(new File(swexFilePath)));
+        RuneExtractor.getInstance(objectMapper.readTree(new File(swexFilePath)));
 
-        Mapper.initiateInstance(objectMapper.readTree(new File(mappingFilePath)));
+        SWEXMapper.initiateInstance(objectMapper.readTree(new File(mappingFilePath)));
 
         ObjectMapper mapper = new ObjectMapper();
-        mapper.writeValue(new File(outputFilePath), Extractor.extractAllRunes());
+        mapper.writeValue(new File(outputFilePath), RuneExtractor.extractAllRunes());
     }
 }

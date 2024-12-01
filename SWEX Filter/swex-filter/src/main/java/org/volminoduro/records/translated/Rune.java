@@ -1,8 +1,9 @@
 package org.volminoduro.records.translated;
 
-import org.volminoduro.enums.translated.Location;
-import org.volminoduro.enums.translated.Quality;
-import org.volminoduro.enums.translated.Set;
+import org.volminoduro.enums.translated.RuneQuality;
+import org.volminoduro.enums.translated.RuneSet;
+import org.volminoduro.enums.translated.RuneSlot;
+import org.volminoduro.filter.Filter;
 import org.volminoduro.records.translated.stat.InnateStat;
 import org.volminoduro.records.translated.stat.MainStat;
 import org.volminoduro.records.translated.stat.SubStat;
@@ -11,13 +12,14 @@ import java.util.Collection;
 
 public record Rune(
         int id,
-        Location location,
-        Quality quality,
+        RuneSlot slot,
+        RuneQuality quality,
         int stars,
-        Set set,
+        RuneSet set,
         int upgraded,
         MainStat mainStat,
         InnateStat innateStat,
         Collection<SubStat> subStats,
-        Monster possessedByMonster) {
+        Monster possessedByMonster,
+        Collection<Filter> filtersPassed) {
 }

@@ -21,7 +21,7 @@ class SubStatsNumberFilterTest {
     @BeforeEach
     void setUp() {
         rune = new Rune(0, null, null, 1, null, 0,
-                null, null, List.of(new SubStat(TypeStat.SPD, 1, false, 0)), null);
+                null, null, List.of(new SubStat(TypeStat.SPD, 1, false, 0)), null, Collections.EMPTY_LIST);
 
         filter = new SubStatsNumberFilter();
     }
@@ -34,6 +34,7 @@ class SubStatsNumberFilterTest {
     @Test
     void noFilter_0SubStatChosen() throws IOException {
         filter.setSubStatsPresenceNumber(0);
+        filter.getSubStats().add(TypeStat.SPD);
         assertTrue(filter.isEligible(rune));
     }
 
@@ -67,7 +68,7 @@ class SubStatsNumberFilterTest {
                 null, null,
                 List.of(new SubStat(TypeStat.SPD, 1, false, 0),
                         new SubStat(TypeStat.CRATE, 0, false, 0)),
-                null);
+                null, Collections.EMPTY_LIST);
 
         filter.setSubStatsPresenceNumber(2);
         Collections.addAll(filter.getSubStats(), TypeStat.values());
@@ -80,7 +81,7 @@ class SubStatsNumberFilterTest {
                 null, null,
                 List.of(new SubStat(TypeStat.SPD, 1, false, 0),
                         new SubStat(TypeStat.CRATE, 0, false, 0)),
-                null);
+                null, Collections.EMPTY_LIST);
 
         filter.setSubStatsPresenceNumber(1);
         Collections.addAll(filter.getSubStats(), TypeStat.values());

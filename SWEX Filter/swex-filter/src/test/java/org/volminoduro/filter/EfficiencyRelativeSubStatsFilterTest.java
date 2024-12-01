@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.volminoduro.enums.translated.TypeStat;
 import org.volminoduro.records.translated.Rune;
 import org.volminoduro.records.translated.stat.SubStat;
-import org.volminoduro.tools.Mapper;
+import org.volminoduro.tools.SWEXMapper;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,13 +25,13 @@ class EfficiencyRelativeSubStatsFilterTest {
 
     @BeforeAll
     static void setUpOnce() throws IOException {
-        Mapper.initiateInstance(new ObjectMapper().readTree(new File(MAPPING_FILE_PATH)));
+        SWEXMapper.initiateInstance(new ObjectMapper().readTree(new File(MAPPING_FILE_PATH)));
     }
 
     @BeforeEach
     void setUp() {
         rune = new Rune(0, null, null, 6, null, 0,
-                null, null, List.of(new SubStat(TypeStat.SPD, 6, false, 0)), null);
+                null, null, List.of(new SubStat(TypeStat.SPD, 6, false, 0)), null, Collections.EMPTY_LIST);
 
         filter = new EfficiencyRelativeSubStatsFilter();
     }
@@ -44,6 +44,7 @@ class EfficiencyRelativeSubStatsFilterTest {
     @Test
     void noFilter_0SubStatChosen() throws IOException {
         filter.setEfficiencyRelativeThreshold(0);
+        filter.getSubStats().add(TypeStat.SPD);
         assertTrue(filter.isEligible(rune));
     }
 
@@ -84,7 +85,7 @@ class EfficiencyRelativeSubStatsFilterTest {
                 null, null,
                 List.of(new SubStat(TypeStat.SPD, 18, false, 0),
                         new SubStat(TypeStat.CRATE, 12, false, 0)),
-                null);
+                null, Collections.EMPTY_LIST);
 
         filter.setEfficiencyRelativeThreshold(80);
         Collections.addAll(filter.getSubStats(), TypeStat.values());

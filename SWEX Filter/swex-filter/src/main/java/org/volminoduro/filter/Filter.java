@@ -3,8 +3,10 @@ package org.volminoduro.filter;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import org.volminoduro.enums.translated.Quality;
-import org.volminoduro.enums.translated.Set;
+import lombok.ToString;
+import org.volminoduro.enums.translated.RuneQuality;
+import org.volminoduro.enums.translated.RuneSet;
+import org.volminoduro.enums.translated.RuneSlot;
 import org.volminoduro.enums.translated.TypeStat;
 import org.volminoduro.records.translated.Rune;
 
@@ -15,12 +17,15 @@ import java.util.Collection;
 @Getter
 @Setter
 @EqualsAndHashCode
+@ToString
 public abstract class Filter {
 
-    Collection<Set> sets = new ArrayList<>();
-    Collection<Quality> qualities = new ArrayList<>();
+    String name = "";
+    Collection<RuneSet> runeSets = new ArrayList<>();
+    Collection<RuneQuality> qualities = new ArrayList<>();
     Collection<Integer> stars = new ArrayList<>();
-    Collection<Integer> slot = new ArrayList<>();
+    Collection<Integer> upgraded = new ArrayList<>();
+    Collection<RuneSlot> slot = new ArrayList<>();
     Collection<TypeStat> mainStats = new ArrayList<>();
     Collection<TypeStat> innateStats = new ArrayList<>();
     Collection<TypeStat> subStats = new ArrayList<>();
@@ -30,10 +35,20 @@ public abstract class Filter {
     public boolean isEligible(Rune rune) throws IOException {
         return isQualitiesEligible(rune)
                 && isSetsEligible(rune)
+                && isUpgradedEligible(rune)
                 && isStarsEligible(rune)
+                && isSlotEligible(rune)
                 && isMainStatsEligible(rune)
                 && isInnateStatsEligible(rune)
                 && isSubStatsEligible(rune);
+    }
+
+    private boolean isSlotEligible(Rune rune) {
+        return slot.isEmpty() || slot.contains(rune.slot());
+    }
+
+    private boolean isUpgradedEligible(Rune rune) {
+        return upgraded.isEmpty() || upgraded.contains(rune.upgraded());
     }
 
     private boolean isStarsEligible(Rune rune) {
@@ -41,7 +56,7 @@ public abstract class Filter {
     }
 
     private boolean isSetsEligible(Rune rune) {
-        return sets.isEmpty() || sets.contains(rune.set()) || rune.set() == Set.Intangible;
+        return runeSets.isEmpty() || runeSets.contains(rune.set()) || rune.set() == RuneSet.Intangible;
     }
 
     private boolean isQualitiesEligible(Rune rune) {
