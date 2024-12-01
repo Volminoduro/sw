@@ -2,9 +2,9 @@ package org.volminoduro.tools;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import org.volminoduro.enums.key.MappingKey;
-import org.volminoduro.enums.translated.Location;
-import org.volminoduro.enums.translated.Quality;
-import org.volminoduro.enums.translated.Set;
+import org.volminoduro.enums.translated.RuneQuality;
+import org.volminoduro.enums.translated.RuneSet;
+import org.volminoduro.enums.translated.RuneSlot;
 import org.volminoduro.enums.translated.TypeStat;
 import org.volminoduro.records.json.MonsterJSON;
 import org.volminoduro.records.json.RuneJSON;
@@ -17,22 +17,24 @@ import org.volminoduro.records.translated.stat.MainStat;
 import org.volminoduro.records.translated.stat.SubStat;
 import org.volminoduro.records.translated.stat.SubStatValue;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Objects;
 
-public final class Mapper {
+public final class SWEXMapper {
 
     public static final String UNKNOWN_MONSTER = "Unknown Monster";
     // TODO Save keys already used (performance issues)
     private static final Collection<SubStatValue> mappedSubStatsValue = new ArrayList<>();
     private static JsonNode instancedMappingJsonNode;
-    private static Mapper instance;
-    // TODO Save keys already used (performance issues incoming)
+    private static SWEXMapper instance;
 
-    private Mapper() {
+    private SWEXMapper() {
     }
 
     public static void initiateInstance(JsonNode mappingJsonNode) {
-        if (instance == null) instance = new Mapper();
+        if (instance == null) instance = new SWEXMapper();
         instancedMappingJsonNode = mappingJsonNode;
     }
 
@@ -48,11 +50,13 @@ public final class Mapper {
                 family = instancedMappingJsonNode.get(MappingKey.MONSTER_LIST.value)
                         .get(MappingKey.MONSTER_NAMES.value)
                         .get(family).asText();
-                String attribute = String.valueOf(monsterJSON.id()).substring(String.valueOf(monsterJSON.id()).length() - 1);
+                String attribute =
+                        String.valueOf(monsterJSON.id()).substring(String.valueOf(monsterJSON.id()).length() - 1);
                 attribute = instancedMappingJsonNode.get(MappingKey.MONSTER_LIST.value)
                         .get(MappingKey.MONSTER_ATTRIBUTES.value)
                         .get(attribute).asText();
-                String secondAwakening = Character.toString(String.valueOf(monsterJSON.id()).charAt(3)).equals("3") ? " 2A" : "";
+                String secondAwakening = Character.toString(String.valueOf(monsterJSON.id()).charAt(3)).equals("3") ?
+                        " 2A" : "";
 
                 monsterName = family + " " + attribute + secondAwakening;
             } catch (NullPointerException unfoundMonster) {
@@ -81,8 +85,10 @@ public final class Mapper {
             subStats.add(subStat);
         }
 
-        return new Rune(runeJSON.id(), Location.valueOfJsonMappingKey(runeJSON.slot_no()), Quality.valueOfJsonMappingKey(runeJSON.rank()), runeJSON.stars(),
-                Set.valueOfJsonMappingKey(runeJSON.set_id()), runeJSON.upgrade_curr(), mainStat, innateStat, subStats, monster);
+        return new Rune(runeJSON.id(), RuneSlot.valueOfJsonMappingKey(runeJSON.slot_no()),
+                RuneQuality.valueOfJsonMappingKey(runeJSON.rank()), runeJSON.stars(),
+                RuneSet.valueOfJsonMappingKey(runeJSON.set_id()), runeJSON.upgrade_curr(), mainStat, innateStat,
+                subStats, monster, Collections.EMPTY_LIST);
     }
 
 
@@ -98,7 +104,8 @@ public final class Mapper {
     }
 
     private static SubStatValueJSON getSubStatValueJSON(TypeStat typeStat, Integer grade) {
-        JsonNode substatValuesList = instancedMappingJsonNode.get(MappingKey.RUNE_LIST.value).get(MappingKey.RUNE_SUBSTAT.value);
+        JsonNode substatValuesList =
+                instancedMappingJsonNode.get(MappingKey.RUNE_LIST.value).get(MappingKey.RUNE_SUBSTAT.value);
 
         JsonNode selectedSubStatValue = substatValuesList.get(String.valueOf(typeStat.jsonMappingKey));
         JsonNode maxSubStatValueNode = selectedSubStatValue.get(MappingKey.RUNE_SUBSTAT_MAX.value);
@@ -122,23 +129,25 @@ public final class Mapper {
     }
 
     public static double calculateSubStatsTotalRolls(Rune rune, Collection<TypeStat> typeStatRollssDesired) {
-        Map<TypeStat, Integer> typeStatsWithRolls = new HashMap<>();
-
-        for (SubStat subStat : rune.subStats()) {
-            SubStatValue subStatValue = getSubStatValue(subStat.typeStat(), rune.stars());
-            int rollsAmountLeft = subStat.amount() - subStatValue.max() / 5;
-            int rollsSuspected = 0;
-            if (rollsAmountLeft != 0) {
-                rollsSuspected = (int) Math.ceil((float) rollsAmountLeft / (subStatValue.max() / 5));
-            }
-
-            typeStatsWithRolls.put(subStat.typeStat(), rollsSuspected);
-        }
-
-        // TODO : Fixing too low value rolls
-        double maxRollsPossible = Math.floor((double) rune.upgraded() / 3);
-
-        // TODO Ancient runes handling
-        return typeStatsWithRolls.entrySet().stream().filter(typeStatIntegerEntry -> typeStatRollssDesired.contains(typeStatIntegerEntry.getKey())).mapToInt(Map.Entry::getValue).sum();
+        throw new RuntimeException("Don't run this method");
+//        Map<TypeStat, Integer> typeStatsWithRolls = new HashMap<>();
+//
+//        for (SubStat subStat : rune.subStats()) {
+//            SubStatValue subStatValue = getSubStatValue(subStat.typeStat(), rune.stars());
+//            int rollsAmountLeft = subStat.amount() - subStatValue.max() / 5;
+//            int rollsSuspected = 0;
+//            if (rollsAmountLeft != 0) {
+//                rollsSuspected = (int) Math.ceil((float) rollsAmountLeft / (subStatValue.max() / 5));
+//            }
+//
+//            typeStatsWithRolls.put(subStat.typeStat(), rollsSuspected);
+//        }
+//
+//        // TODO : Fixing too low value rolls
+//        double maxRollsPossible = Math.floor((double) rune.upgraded() / 3);
+//
+//        // TODO Ancient runes handling
+//        return typeStatsWithRolls.entrySet().stream().filter(typeStatIntegerEntry -> typeStatRollssDesired.contains
+//        (typeStatIntegerEntry.getKey())).mapToInt(Map.Entry::getValue).sum();
     }
 }

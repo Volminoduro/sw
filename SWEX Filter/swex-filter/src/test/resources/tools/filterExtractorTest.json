@@ -1,0 +1,78 @@
+{
+  "filters": [
+    {
+      "name": "efficiency 1 no filter specific",
+      "type": {
+        "mode": "efficiency",
+        "value": 80
+      },
+      "sets": [
+        "Energy"
+      ],
+      "qualities": [
+        "Legend"
+      ],
+      "stars": [
+        "ALL"
+      ],
+      "slots": [
+        "ALL"
+      ],
+      "main_stat": [
+        "ATK %",
+        "ATK +"
+      ]
+    },
+    {
+      "name": "substats 2 no filter specific",
+      "type": {
+        "mode": "substats",
+        "value": 3
+      },
+      "sets": [
+        "All"
+      ],
+      "qualities": [
+        "ALL"
+      ],
+      "stars": [
+        6
+      ],
+      "slots": [
+        1
+      ],
+      "main_stat": [
+        "SPD"
+      ],
+      "innate_stat": [
+        "ALL"
+      ]
+    },
+    {
+      "name": "efficiency 3",
+      "type": {
+        "mode": "efficiency",
+        "value": 100
+      },
+      "sub_stats": [
+        "ALL"
+      ]
+    },
+    {
+      "name": "substats 4 no filter specific",
+      "type": {
+        "mode": "substats",
+        "value": 3
+      },
+      "slots": [
+        1
+      ],
+      "sub_stat": [
+        "SPD"
+      ],
+      "innate_stat": [
+        "ALL"
+      ]
+    }
+  ]
+}

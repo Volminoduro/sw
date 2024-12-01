@@ -8,16 +8,16 @@ import org.volminoduro.records.translated.Rune;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public final class Extractor {
+public final class RuneExtractor {
 
-    private static Extractor instance;
+    private static RuneExtractor instance;
     private static JsonNode instancedSWEXFileJsonNode;
 
-    private Extractor() {
+    private RuneExtractor() {
     }
 
     public static void getInstance(JsonNode swexFileJsonNode) {
-        if (instance == null) instance = new Extractor();
+        if (instance == null) instance = new RuneExtractor();
         instancedSWEXFileJsonNode = swexFileJsonNode;
     }
 
@@ -28,16 +28,18 @@ public final class Extractor {
 
         for (JsonNode monster : monsterList) {
             MonsterJSON monsterJSON = Builder.buildMonsterJSONFromJsonNode(monster);
-            monsterJSON.runesJSON().forEach(rune -> runes.add(Mapper.translateRuneJSON(rune, Builder.buildMonsterFromMonsterJSON(monsterJSON))));
+            monsterJSON.runesJSON().forEach(rune -> runes.add(SWEXMapper.translateRuneJSON(rune, Builder.buildMonsterFromMonsterJSON(monsterJSON))));
         }
 
         runes.addAll(extractRunesFromJsonNodeListOfRunes(instancedSWEXFileJsonNode.get(SWEXFileJSONKey.RUNES.value)));
+
+
         return runes;
     }
 
     private static Collection<Rune> extractRunesFromJsonNodeListOfRunes(JsonNode jsonNode) {
         Collection<Rune> runes = new ArrayList<>();
-        jsonNode.forEach(runeJsonNode -> runes.add(Mapper.translateRuneJSON(Builder.buildRuneJSONFromJsonNode(runeJsonNode), null)));
+        jsonNode.forEach(runeJsonNode -> runes.add(SWEXMapper.translateRuneJSON(Builder.buildRuneJSONFromJsonNode(runeJsonNode), null)));
         return runes;
     }
 }
