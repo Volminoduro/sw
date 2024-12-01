@@ -3,14 +3,13 @@ package org.volminoduro.tools;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.volminoduro.enums.key.SWEXFileJSONKey;
 import org.volminoduro.enums.translated.TypeStat;
+import org.volminoduro.filter.Filter;
 import org.volminoduro.records.Pair;
-import org.volminoduro.records.json.MonsterJSON;
-import org.volminoduro.records.json.RuneJSON;
-import org.volminoduro.records.json.SubStatJSON;
-import org.volminoduro.records.json.SubStatValueJSON;
+import org.volminoduro.records.json.*;
 import org.volminoduro.records.translated.Monster;
 import org.volminoduro.records.translated.stat.SubStat;
 import org.volminoduro.records.translated.stat.SubStatValue;
+import org.volminoduro.tools.exceptions.RequiredNamedFilterException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -51,7 +50,7 @@ public final class Builder {
     }
 
     public static Monster buildMonsterFromMonsterJSON(MonsterJSON monsterJSON) {
-        return new Monster(monsterJSON.id(), Mapper.getMonsterName(monsterJSON));
+        return new Monster(monsterJSON.id(), SWEXMapper.getMonsterName(monsterJSON));
     }
 
     public static SubStatValue buildSubStatValueFromSubStatValueJSON(SubStatValueJSON subStatValueJSON) {
@@ -60,5 +59,12 @@ public final class Builder {
 
     public static SubStat buildMinimalSubStat(TypeStat typeStat, int amount) {
         return new SubStat(typeStat, amount, false, 0);
+    }
+
+    public static Filter buildFilterFromFilterJSON(FilterJSON filterJSON) {
+        if ((filterJSON.name() != null && !filterJSON.name().trim().isEmpty())) {
+            throw new RequiredNamedFilterException("");
+        }
+        return null;
     }
 }

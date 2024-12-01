@@ -11,7 +11,7 @@ import org.volminoduro.records.translated.stat.SubStat;
 @EqualsAndHashCode(callSuper = true)
 public class SubStatsNumberFilter extends Filter {
 
-    Integer subStatsPresenceNumber;
+    Integer subStatsPresenceNumber = 0;
 
     @Override
     boolean isSubStatsEligible(Rune rune) {

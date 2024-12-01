@@ -21,6 +21,7 @@ class FilterTest {
     Rune runeForSetTest;
     Rune runeForQualityTest;
     Rune runeForStarsTest;
+    Rune runeForUpgradedTest;
     Rune runeForMainStatsTest;
     Rune runeForInnateStatsTest;
     Filter filter;
@@ -28,19 +29,22 @@ class FilterTest {
     @BeforeEach
     void setUp() {
         runeForSetTest = new Rune(0, null, null, 0, Set.Rage, 0,
-                null, null, null, null);
+                null, null, null, null, Collections.EMPTY_LIST);
 
         runeForQualityTest = new Rune(0, null, Quality.LEGEND, 0, null, 0,
-                null, null, null, null);
+                null, null, null, null, Collections.EMPTY_LIST);
 
         runeForStarsTest = new Rune(0, null, null, 5, null, 0,
-                null, null, null, null);
+                null, null, null, null, Collections.EMPTY_LIST);
+
+        runeForUpgradedTest = new Rune(0, null, null, 5, null, 6,
+                null, null, null, null, Collections.EMPTY_LIST);
 
         runeForMainStatsTest = new Rune(0, null, null, 0, null, 0,
-                new MainStat(TypeStat.SPD, 0), null, null, null);
+                new MainStat(TypeStat.SPD, 0), null, null, null, Collections.EMPTY_LIST);
 
         runeForInnateStatsTest = new Rune(0, null, null, 0, null, 0,
-                null, new InnateStat(TypeStat.SPD, 0), null, null);
+                null, new InnateStat(TypeStat.SPD, 0), null, null, Collections.EMPTY_LIST);
 
         filter = new SubStatsNumberFilter();
     }
@@ -60,7 +64,7 @@ class FilterTest {
     @Test
     void isEligibleSet_IntangibleSet() throws IOException {
         runeForSetTest = new Rune(0, null, null, 0, Set.Intangible, 0,
-                null, null, null, null);
+                null, null, null, null, Collections.EMPTY_LIST);
         assertTrue(filter.isEligible(runeForSetTest));
     }
 
@@ -112,6 +116,25 @@ class FilterTest {
     void isEligibleStars_AllStars() throws IOException {
         filter.getStars().addAll(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertTrue(filter.isEligible(runeForStarsTest));
+    }
+
+    @Test
+    void isEligibleUpgraded_OneOfUpgraded() throws IOException {
+        filter.getUpgraded().add(6);
+        filter.getUpgraded().add(9);
+        assertTrue(filter.isEligible(runeForUpgradedTest));
+    }
+
+    @Test
+    void isEligibleUpgraded_NoMatchUpgraded() throws IOException {
+        filter.getUpgraded().add(3);
+        assertFalse(filter.isEligible(runeForUpgradedTest));
+    }
+
+    @Test
+    void isEligibleUpgraded_AllUpgraded() throws IOException {
+        filter.getUpgraded().addAll(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15));
+        assertTrue(filter.isEligible(runeForUpgradedTest));
     }
 
     @Test
