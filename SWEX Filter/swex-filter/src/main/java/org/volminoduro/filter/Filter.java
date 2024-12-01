@@ -17,9 +17,11 @@ import java.util.Collection;
 @EqualsAndHashCode
 public abstract class Filter {
 
+    String name = "";
     Collection<Set> sets = new ArrayList<>();
     Collection<Quality> qualities = new ArrayList<>();
     Collection<Integer> stars = new ArrayList<>();
+    Collection<Integer> upgraded = new ArrayList<>();
     Collection<Integer> slot = new ArrayList<>();
     Collection<TypeStat> mainStats = new ArrayList<>();
     Collection<TypeStat> innateStats = new ArrayList<>();
@@ -30,10 +32,15 @@ public abstract class Filter {
     public boolean isEligible(Rune rune) throws IOException {
         return isQualitiesEligible(rune)
                 && isSetsEligible(rune)
+                && isUpgradedEligible(rune)
                 && isStarsEligible(rune)
                 && isMainStatsEligible(rune)
                 && isInnateStatsEligible(rune)
                 && isSubStatsEligible(rune);
+    }
+
+    private boolean isUpgradedEligible(Rune rune) {
+        return upgraded.isEmpty() || upgraded.contains(rune.upgraded());
     }
 
     private boolean isStarsEligible(Rune rune) {

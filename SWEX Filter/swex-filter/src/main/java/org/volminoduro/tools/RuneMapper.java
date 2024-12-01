@@ -19,20 +19,19 @@ import org.volminoduro.records.translated.stat.SubStatValue;
 
 import java.util.*;
 
-public final class Mapper {
+public final class RuneMapper {
 
     public static final String UNKNOWN_MONSTER = "Unknown Monster";
     // TODO Save keys already used (performance issues)
     private static final Collection<SubStatValue> mappedSubStatsValue = new ArrayList<>();
     private static JsonNode instancedMappingJsonNode;
-    private static Mapper instance;
-    // TODO Save keys already used (performance issues incoming)
+    private static RuneMapper instance;
 
-    private Mapper() {
+    private RuneMapper() {
     }
 
     public static void initiateInstance(JsonNode mappingJsonNode) {
-        if (instance == null) instance = new Mapper();
+        if (instance == null) instance = new RuneMapper();
         instancedMappingJsonNode = mappingJsonNode;
     }
 
@@ -82,7 +81,7 @@ public final class Mapper {
         }
 
         return new Rune(runeJSON.id(), Location.valueOfJsonMappingKey(runeJSON.slot_no()), Quality.valueOfJsonMappingKey(runeJSON.rank()), runeJSON.stars(),
-                Set.valueOfJsonMappingKey(runeJSON.set_id()), runeJSON.upgrade_curr(), mainStat, innateStat, subStats, monster);
+                Set.valueOfJsonMappingKey(runeJSON.set_id()), runeJSON.upgrade_curr(), mainStat, innateStat, subStats, monster, Collections.EMPTY_LIST);
     }
 
 

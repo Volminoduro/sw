@@ -23,11 +23,12 @@ import org.volminoduro.records.translated.stat.SubStat;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class MapperTest {
+class RuneMapperTest {
 
     private static final String MAPPING_FILE_PATH = "src/main/resources/mapping.json";
     MonsterJSON monsterJSON;
@@ -35,7 +36,7 @@ class MapperTest {
 
     @BeforeAll
     static void setUpOnce() throws IOException {
-        Mapper.initiateInstance(new ObjectMapper().readTree(new File(MAPPING_FILE_PATH)));
+        RuneMapper.initiateInstance(new ObjectMapper().readTree(new File(MAPPING_FILE_PATH)));
     }
 
     @BeforeEach
@@ -68,7 +69,7 @@ class MapperTest {
 
     @Test
     void getMonsterName() {
-        assertEquals("Eirgar", Mapper.getMonsterName(monsterJSON));
+        assertEquals("Eirgar", RuneMapper.getMonsterName(monsterJSON));
     }
 
     @Test
@@ -87,22 +88,22 @@ class MapperTest {
                 new MainStat(TypeStat.ATK_PERCENT, 118),
                 null,
                 Arrays.asList(subStat1, subStat2, subStat3, subStat4),
-                new Monster(23015, "Eirgar"));
-        assertEquals(expected, Mapper.translateRuneJSON(runeJSON, Builder.buildMonsterFromMonsterJSON(monsterJSON)));
+                new Monster(23015, "Eirgar"), Collections.EMPTY_LIST);
+        assertEquals(expected, RuneMapper.translateRuneJSON(runeJSON, Builder.buildMonsterFromMonsterJSON(monsterJSON)));
     }
 
     @Test
     void calculateTotalRelativeEfficiency_MaxEfficiencyForOneSubStat() {
-        assertEquals(100, Mapper.calculateTotalRelativeEfficiency(List.of(new SubStat(TypeStat.SPD, 30, false, 0)), 6));
+        assertEquals(100, RuneMapper.calculateTotalRelativeEfficiency(List.of(new SubStat(TypeStat.SPD, 30, false, 0)), 6));
         // Considering enchanting case
-        assertEquals(20, Mapper.calculateTotalRelativeEfficiency(List.of(new SubStat(TypeStat.SPD, 6, true, 0)), 6));
+        assertEquals(20, RuneMapper.calculateTotalRelativeEfficiency(List.of(new SubStat(TypeStat.SPD, 6, true, 0)), 6));
         // Ignore grinding case
-        assertEquals(100, Mapper.calculateTotalRelativeEfficiency(List.of(new SubStat(TypeStat.SPD, 30, false, 5)), 6));
+        assertEquals(100, RuneMapper.calculateTotalRelativeEfficiency(List.of(new SubStat(TypeStat.SPD, 30, false, 5)), 6));
     }
 
     @Test
     void calculateTotalRelativeEfficiency_With4SubStats() {
-        assertEquals(100, Mapper.calculateTotalRelativeEfficiency(List.of(new SubStat(TypeStat.SPD, 30, false, 0),
+        assertEquals(100, RuneMapper.calculateTotalRelativeEfficiency(List.of(new SubStat(TypeStat.SPD, 30, false, 0),
                         new SubStat(TypeStat.ATK_FLAT, 20, false, 0),
                         new SubStat(TypeStat.ATK_PERCENT, 8, false, 0),
                         new SubStat(TypeStat.CRATE, 6, false, 0)),
@@ -126,9 +127,9 @@ class MapperTest {
                 new MainStat(TypeStat.ATK_PERCENT, 118),
                 null,
                 Arrays.asList(subStat1, subStat2, subStat3, subStat4),
-                new Monster(23015, "Eirgar"));
+                new Monster(23015, "Eirgar"), Collections.EMPTY_LIST);
 
-        assertEquals(0, Mapper.calculateSubStatsTotalRolls(rune, List.of(TypeStat.values())));
+        assertEquals(0, RuneMapper.calculateSubStatsTotalRolls(rune, List.of(TypeStat.values())));
     }
 
     @Test
@@ -148,9 +149,9 @@ class MapperTest {
                 new MainStat(TypeStat.ATK_PERCENT, 118),
                 null,
                 Arrays.asList(subStat1, subStat2, subStat3, subStat4),
-                new Monster(23015, "Eirgar"));
+                new Monster(23015, "Eirgar"), Collections.EMPTY_LIST);
 
-        assertEquals(0, Mapper.calculateSubStatsTotalRolls(rune, List.of(TypeStat.DEF_FLAT)));
+        assertEquals(0, RuneMapper.calculateSubStatsTotalRolls(rune, List.of(TypeStat.DEF_FLAT)));
     }
 
     @Test
@@ -170,9 +171,9 @@ class MapperTest {
                 new MainStat(TypeStat.ATK_PERCENT, 118),
                 null,
                 Arrays.asList(subStat1, subStat2, subStat3, subStat4),
-                new Monster(23015, "Eirgar"));
+                new Monster(23015, "Eirgar"), Collections.EMPTY_LIST);
 
-        assertEquals(3, Mapper.calculateSubStatsTotalRolls(rune, List.of(TypeStat.SPD, TypeStat.ACC)));
+        assertEquals(3, RuneMapper.calculateSubStatsTotalRolls(rune, List.of(TypeStat.SPD, TypeStat.ACC)));
     }
 
     @Test
@@ -192,9 +193,9 @@ class MapperTest {
                 new MainStat(TypeStat.ATK_PERCENT, 118),
                 null,
                 Arrays.asList(subStat1, subStat2, subStat3, subStat4),
-                new Monster(23015, "Eirgar"));
+                new Monster(23015, "Eirgar"), Collections.EMPTY_LIST);
 
-        assertEquals(4, Mapper.calculateSubStatsTotalRolls(rune, List.of(TypeStat.values())));
+        assertEquals(4, RuneMapper.calculateSubStatsTotalRolls(rune, List.of(TypeStat.values())));
     }
 
 }

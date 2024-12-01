@@ -12,6 +12,7 @@ import org.volminoduro.records.json.SubStatJSON;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class BuilderTest {
 
@@ -43,5 +44,25 @@ class BuilderTest {
                         new SubStatJSON(2, 18, 0, 0),
                         new SubStatJSON(8, 10, 0, 0)));
         assertEquals(expected, Builder.buildRuneJSONFromJsonNode(runeJSONNode));
+    }
+
+    @Test
+    void buildMonsterJSONFromJsonNode() {
+        fail("TODO");
+    }
+
+    @Test
+    void buildMonsterFromMonsterJSON() {
+        fail("TODO");
+    }
+
+    @Test
+    void buildSubStatValueFromSubStatValueJSON() {
+        fail("TODO");
+    }
+
+    @Test
+    void buildMinimalSubStat() {
+        fail("TODO");
     }
 }
