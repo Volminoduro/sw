@@ -6,33 +6,29 @@ import org.volminoduro.tools.RuneExtractor;
 import org.volminoduro.tools.SWEXMapper;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
+        Map<String, String> params = new HashMap<>();
+        for (int i = 0; i < args.length; i += 2) {if (i + 1 < args.length) {params.put(args[i], args[i + 1]);}}
+        final String propertiesConfFilePath = params.get("-path");
 
-        // TODO : Conf file to get all paths needed ?If not input when running main, get it from root folder
-        final String mappingFilePath =
-                Arrays.stream(args).filter(s -> s.equalsIgnoreCase("mapping_file_path")).findFirst().get();
-        final String swexFilePath =
-                Arrays.stream(args).filter(s -> s.equalsIgnoreCase("swex_file_path")).findFirst().get();
-        final String filterFilePath =
-                Arrays.stream(args).filter(s -> s.equalsIgnoreCase("filter_file_path")).findFirst().get();
-        final String outputFilePath = "src/main/resources/runesSelected.json";
-        // String outputFilePath = Arrays.stream(args).filter(s -> s.equalsIgnoreCase("swex_file_path")).findFirst()
-        // .get();
+        Properties prop = new Properties();
+        FileInputStream fis = new FileInputStream(propertiesConfFilePath);
+        prop.load(fis);
 
         ObjectMapper objectMapper = new ObjectMapper();
-
-        RuneExtractor.getInstance(objectMapper.readTree(new File(swexFilePath)));
-
-        SWEXMapper.initiateInstance(objectMapper.readTree(new File(mappingFilePath)));
-
-        FilterExtractor.getInstance(objectMapper.readTree(new File(filterFilePath)));
+        RuneExtractor.getInstance(objectMapper.readTree(new File(prop.getProperty("swex.path"))));
+        SWEXMapper.initiateInstance(objectMapper.readTree(new File("src/main/resources/mapping.json")));
+        FilterExtractor.getInstance(objectMapper.readTree(new File(prop.getProperty("filter.path"))));
 
         ObjectMapper mapper = new ObjectMapper();
-        mapper.writeValue(new File(outputFilePath), RuneExtractor.extractAllRunes());
+        mapper.writeValue(new File(prop.getProperty("output.path")), RuneExtractor.extractAllRunes());
     }
 }
